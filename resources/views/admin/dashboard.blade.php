@@ -44,7 +44,7 @@
                     <span class="material-symbols-outlined">menu</span>
                 </button>
                 <div class="flex items-center gap-3">
-                    <div class="size-8 sm:size-10 bg-blue-500/10 rounded-lg p-1 flex items-center justify-center shrink-0">
+                    <div class="h-10 w-10 sm:h-12 sm:w-12 bg-blue-500/10 rounded-lg p-1 flex items-center justify-center shrink-0">
                         <img src="{{ asset('assets/images/siabsenlogo.png') }}" alt="Logo" class="w-full h-full object-contain filter drop-shadow-sm">
                     </div>
                     <h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white truncate">Admin SIABSEN</h1>
@@ -68,7 +68,7 @@
                 <div class="flex items-center gap-3 sm:pl-6 sm:border-l border-slate-200 dark:border-slate-700">
                     <div class="text-right hidden sm:block">
                         <p class="text-sm font-semibold text-slate-900 dark:text-white truncate max-w-[120px]">{{ auth()->user()->name ?? 'Admin' }}</p>
-                        <p class="text-[10px] text-slate-500 dark:text-slate-400">Kota Solok</p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400">SIABSEN</p>
                     </div>
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
