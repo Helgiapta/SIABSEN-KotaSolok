@@ -97,10 +97,7 @@
             <h2 class="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white tracking-tight" id="page-title">Dashboard Publik</h2>
             <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1" id="page-subtitle">Informasi kehadiran secara real-time</p>
         </div>
-        <div class="flex items-center gap-2 px-4 py-2 bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-600 dark:text-slate-300 font-black text-[11px] uppercase tracking-[0.15em] shrink-0">
-            <span class="material-symbols-outlined text-[18px]">public</span>
-            <span>Publik Panel</span>
-        </div>
+        <!-- Removed Publik Panel indicator -->
     </div>
 
     <!-- Dashboard Stats / Clock -->
