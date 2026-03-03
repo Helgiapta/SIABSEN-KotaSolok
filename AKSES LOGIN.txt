@@ -1,2 +1,5 @@
 Username: 199505222024031002
 Password: B7k2m9Pq!
+
+# TAMBAH ADMIN BARU
+php artisan tinker --execute="DB::table('user')->insert(['name' => 'Administrator', 'username' => 'USER LOGIN', 'password' => Hash::make('PASSWORD'), 'created_at' => now(), 'updated_at' => now()])"

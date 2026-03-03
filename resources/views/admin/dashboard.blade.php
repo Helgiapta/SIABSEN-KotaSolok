@@ -135,13 +135,13 @@
             <div class="relative self-center lg:self-auto pr-1 pb-1 max-w-full">
                 <div class="absolute inset-0 bg-primary-100 dark:bg-slate-700 rounded-xl translate-y-1 translate-x-1"></div>
                 <div class="relative flex bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-1.5 rounded-xl border border-slate-200 dark:border-slate-600">
-                    <button onclick="switchTab('rekap')" id="btn-tab-rekap" class="whitespace-nowrap px-3 sm:px-4 py-2 bg-primary-50 dark:bg-slate-700 rounded-lg text-sm font-bold text-primary dark:text-white shadow-sm transition-all flex items-center gap-1.5">
+                    <button onclick="switchTab('rekap')" id="btn-tab-rekap" class="whitespace-nowrap px-3 sm:px-4 py-2 bg-primary-50 dark:bg-slate-700 rounded-lg text-xs sm:text-sm font-bold text-primary dark:text-white shadow-sm transition-all flex items-center gap-1.5">
                         <span class="material-symbols-outlined text-[18px]">calendar_month</span>
-                        <span class="hidden xs:inline sm:inline">Rekap</span>
+                        <span>Rekap</span>
                     </button>
-                    <button onclick="switchTab('anggota')" id="btn-tab-anggota" class="whitespace-nowrap px-3 sm:px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5">
+                    <button onclick="switchTab('anggota')" id="btn-tab-anggota" class="whitespace-nowrap px-3 sm:px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5">
                         <span class="material-symbols-outlined text-[18px]">manage_accounts</span>
-                        <span class="hidden sm:inline">Data Anggota</span>
+                        <span>Data Anggota</span>
                     </button>
                 </div>
             </div>
