@@ -43,7 +43,6 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom scrollbar for table if needed */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -200,22 +199,39 @@
     <div class="relative group mt-4 h-full mb-8">
         <div class="absolute inset-0 bg-slate-200/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2.5 translate-x-2.5 transition-transform md:group-hover:translate-y-3.5 md:group-hover:translate-x-3.5"></div>
         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-slate-900/5 overflow-hidden flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-            <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row justify-between sm:items-center gap-6">
-                <div>
-                    <h3 class="font-black text-xl text-slate-800 dark:text-white flex items-center gap-3">
-                        <span class="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-xl text-slate-600 material-symbols-outlined">groups</span>
-                        Presensi Real-time
-                    </h3>
-                    <p class="text-sm text-slate-400 mt-1 sm:ml-12">Data diperbarui otomatis setiap 5 detik</p>
-                </div>
-                <div class="flex items-center gap-3 w-full sm:w-auto">
-                    <div class="relative w-full sm:w-64">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]">search</span>
-                        <input id="searchInput" class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all" placeholder="Cari nama anggota..." type="text"/>
+            <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-700/50 flex flex-col gap-4">
+                <!-- Baris 1: Judul + Search -->
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                    <div>
+                        <h3 class="font-black text-xl text-slate-800 dark:text-white flex items-center gap-3">
+                            <span class="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-xl text-slate-600 material-symbols-outlined">groups</span>
+                            Presensi Real-time
+                        </h3>
+                        <p class="text-sm text-slate-400 mt-1 sm:ml-12">Data diperbarui otomatis setiap 5 detik</p>
                     </div>
-                    <button onclick="fetchData()" class="p-2.5 text-slate-400 md:hover:text-primary transition-colors bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm md:hover:shadow-md">
-                        <span class="material-symbols-outlined text-[20px]" id="refresh-icon">refresh</span>
-                    </button>
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <div class="relative w-full sm:w-64">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]">search</span>
+                            <input id="searchInput" class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all" placeholder="Cari nama anggota..." type="text"/>
+                        </div>
+                        <button onclick="fetchData()" class="p-2.5 text-slate-400 md:hover:text-primary transition-colors bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm md:hover:shadow-md">
+                            <span class="material-symbols-outlined text-[20px]" id="refresh-icon">refresh</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Baris 2: Filter chips -->
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest shrink-0">Status Scan:</span>
+                    <button data-scan="" onclick="setScanFilter(this)" class="filter-scan active-filter px-3 py-1 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all">Semua</button>
+                    <button data-scan="Datang" onclick="setScanFilter(this)" class="filter-scan px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-all">IN (Datang)</button>
+                    <button data-scan="Pulang" onclick="setScanFilter(this)" class="filter-scan px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-all">OUT (Pulang)</button>
+                    <span class="text-slate-200 mx-1">|</span>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest shrink-0">Status Kehadiran:</span>
+                    <button data-status="" onclick="setStatusFilter(this)" class="filter-status active-filter px-3 py-1 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all">Semua</button>
+                    <button data-status="Hadir Penuh" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-green-500 hover:text-green-600 transition-all">Hadir Penuh</button>
+                    <button data-status="Hadir Setengah" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-yellow-500 hover:text-yellow-600 transition-all">Hadir Setengah</button>
+                    <button data-status="Izin" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-blue-500 hover:text-blue-600 transition-all">Izin</button>
+                    <button data-status="Tidak Hadir" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-red-500 hover:text-red-600 transition-all">Tidak Hadir</button>
                 </div>
             </div>
             
@@ -230,7 +246,6 @@
                     </tr>
                 </thead>
                 <tbody id="attendance-table-body" class="divide-y divide-slate-100 dark:divide-slate-700">
-                    <!-- Data will be injected here via JS -->
                     <tr>
                         <td colspan="4" class="px-6 py-10 justify-center text-center">
                             Memuat data real-time...
@@ -247,19 +262,24 @@
 <!-- Footer -->
 <footer class="bg-white/50 backdrop-blur-lg dark:bg-slate-900/50 border-t border-white/50 dark:border-slate-800 mt-auto">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-3">
             <p class="text-sm text-slate-500 dark:text-slate-400 text-center md:text-left">
-                © {{ date('Y') }} Pemerintah Kota Solok
+                © {{ date('Y') }}
+                <a href="https://solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Pemerintah Kota Solok</a>
+                · Dikelola oleh
+                <a href="https://kominfo.solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Diskominfo Kota Solok</a>
             </p>
             <div class="flex gap-6 text-sm text-slate-500 dark:text-slate-400">
-                <a class="hover:text-primary transition-colors" href="#">SIABSEN Kota Solok</a>
+                <a class="hover:text-primary transition-colors font-medium flex items-center gap-1" href="{{ route('public.dashboard') }}">
+                    <span class="material-symbols-outlined text-[16px]">fingerprint</span>
+                    SIABSEN Kota Solok
+                </a>
             </div>
         </div>
     </div>
 </footer>
 
 <script>
-    // Live Clock Logic
     function updateClock() {
         const now = new Date();
         const dateOptions = { month: 'short', day: 'numeric', year: 'numeric' };
@@ -267,7 +287,6 @@
         
         let hours = now.getHours();
         
-        // Logika Waktu Indonesia (Pagi, Siang, Sore, Malam)
         let waktuSapaan = 'MALAM';
         if (hours >= 4 && hours < 11) {
             waktuSapaan = 'PAGI';
@@ -280,7 +299,6 @@
         document.getElementById('current-date').textContent = now.toLocaleDateString('id-ID', dateOptions).replace(/ /, ', ');
         document.getElementById('current-day').textContent = now.toLocaleDateString('id-ID', dayOptions);
         
-        // Gunakan format 24 Jam
         document.getElementById('clock-hours').textContent = hours.toString().padStart(2, '0');
         document.getElementById('clock-minutes').textContent = now.getMinutes().toString().padStart(2, '0');
         document.getElementById('clock-seconds').textContent = now.getSeconds().toString().padStart(2, '0');
@@ -290,7 +308,6 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Fetch and render data
     let attendanceData = [];
 
     async function fetchData() {
@@ -321,10 +338,12 @@
         let statDatang = 0;
         let statPulang = 0;
 
-        const filteredData = data.filter(item => item.nama.toLowerCase().includes(searchInput));
+        let filteredData = data.filter(item => item.nama.toLowerCase().includes(searchInput));
+        if (activeScanFilter)   filteredData = filteredData.filter(i => i.tipe_absen === activeScanFilter);
+        if (activeStatusFilter) filteredData = filteredData.filter(i => i.status_hari_ini === activeStatusFilter);
 
         if (filteredData.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-slate-500 dark:text-slate-400">Belum ada data scan anggota untuk hari ini</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-slate-500 dark:text-slate-400">Tidak ada data yang cocok dengan filter yang dipilih</td></tr>`;
             document.getElementById('stat-datang').innerText = '0';
             document.getElementById('stat-pulang').innerText = '0';
             return;
@@ -333,7 +352,6 @@
         filteredData.forEach(item => {
             const initials = item.nama.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
             
-            // Logic Label
             let typeBadge = '';
             let statusBadge = '';
 
@@ -349,8 +367,10 @@
                 statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-green-50 text-green-700 border border-green-200 shadow-sm flex items-center w-fit gap-1"><span class="material-symbols-outlined text-[12px]">check_circle</span> Hadir Penuh</span>`;
             } else if (item.status_hari_ini === 'Hadir Setengah') {
                 statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-yellow-50 text-yellow-700 border border-yellow-200 shadow-sm flex items-center w-fit gap-1"><span class="material-symbols-outlined text-[12px]">schedule</span> Hadir Setengah</span>`;
+            } else if (item.status_hari_ini === 'Izin') {
+                statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200 shadow-sm flex items-center w-fit gap-1"><span class="material-symbols-outlined text-[12px]">assignment_late</span> Izin</span>`;
             } else {
-                statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-50 text-red-700 border border-red-200 shadow-sm flex items-center w-fit gap-1"><span class="material-symbols-outlined text-[12px]">cancel</span> Absen / Tidak Hadir</span>`;
+                statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-50 text-red-700 border border-red-200 shadow-sm flex items-center w-fit gap-1"><span class="material-symbols-outlined text-[12px]">cancel</span> Tidak Hadir</span>`;
             }
 
             const row = `
@@ -364,7 +384,9 @@
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        ${typeBadge}
+                        <div class="flex items-center justify-center">
+                            ${typeBadge}
+                        </div>
                     </td>
                     <td class="px-6 py-4 text-center">
                         <div class="flex items-center justify-center gap-2 text-slate-600 dark:text-slate-300">
@@ -372,8 +394,10 @@
                             <span class="font-mono text-sm">${item.waktu}</span>
                         </div>
                     </td>
-                    <td class="px-6 py-4 text-center">
-                        ${statusBadge}
+                    <td class="px-6 py-4">
+                        <div class="flex items-center justify-center">
+                            ${statusBadge}
+                        </div>
                     </td>
                 </tr>
             `;
@@ -384,15 +408,37 @@
         document.getElementById('stat-pulang').innerText = statPulang;
     }
 
-    // Event listeners
+    let activeScanFilter = '';
+    let activeStatusFilter = '';
+
+    function setScanFilter(btn) {
+        activeScanFilter = btn.dataset.scan;
+        document.querySelectorAll('.filter-scan').forEach(b => {
+            b.classList.remove('active-filter', 'bg-primary', 'text-white', 'border-primary');
+            b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+        });
+        btn.classList.add('active-filter', 'bg-primary', 'text-white', 'border-primary');
+        btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+        renderTable(attendanceData);
+    }
+
+    function setStatusFilter(btn) {
+        activeStatusFilter = btn.dataset.status;
+        document.querySelectorAll('.filter-status').forEach(b => {
+            b.classList.remove('active-filter', 'bg-primary', 'text-white', 'border-primary');
+            b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+        });
+        btn.classList.add('active-filter', 'bg-primary', 'text-white', 'border-primary');
+        btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+        renderTable(attendanceData);
+    }
+
     document.getElementById('searchInput').addEventListener('input', () => {
         renderTable(attendanceData);
     });
 
-    // Auto Refresh every 5 seconds
     setInterval(fetchData, 5000);
     
-    // Initial fetch
     document.addEventListener("DOMContentLoaded", fetchData);
 
 </script>

@@ -33,6 +33,11 @@
             },
         }
     </script>
+    <style>
+        .tab-content { display: none !important; }
+        .tab-content.aktif { display: block !important; }
+        .tab-content.aktif.is-grid { display: grid !important; }
+    </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-display min-h-screen flex flex-col">
     <!-- Top Navigation -->
@@ -52,7 +57,6 @@
             </div>
             
             <div class="flex items-center gap-3 sm:gap-6">
-                <!-- Desktop Navigation Buttons -->
                 <div class="hidden lg:flex gap-3">
                     <a href="{{ route('public.dashboard') }}" class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl font-bold text-sm transition-colors border border-slate-200 dark:border-slate-700">
                         <span class="material-symbols-outlined text-xl">public</span>
@@ -68,7 +72,7 @@
                 <div class="flex items-center gap-3 sm:pl-6 sm:border-l border-slate-200 dark:border-slate-700">
                     <div class="text-right hidden sm:block">
                         <p class="text-sm font-semibold text-slate-900 dark:text-white truncate max-w-[120px]">{{ auth()->user()->name ?? 'Admin' }}</p>
-                        <p class="text-[10px] text-slate-500 dark:text-slate-400">SIABSEN</p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400">Selamat Datang</p>
                     </div>
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
@@ -79,11 +83,9 @@
                 </div>
             </div>
         </div>
-
         </div>
     </header>
 
-    <!-- Mobile Drawer Menu (Moved outside header for true z-index overlay) -->
     <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[100] hidden pointer-events-none transition-all duration-300">
         <div id="mobile-menu-backdrop" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="toggleMobileMenu()"></div>
         <div id="mobile-menu-drawer" class="absolute left-0 top-0 bottom-0 w-72 bg-white dark:bg-surface-dark shadow-2xl flex flex-col p-6 pointer-events-auto transform -translate-x-full transition-transform duration-300 ease-in-out z-[101]">
@@ -130,17 +132,74 @@
                 <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1" id="page-subtitle">Pantau jadwal dan riwayat presensi harian anggota</p>
             </div>
             
-            <div class="relative self-center lg:self-auto pr-1 pb-1">
-                <!-- Inner backing limits to container so it doesnt bleed translate bounds -->
+            <div class="relative self-center lg:self-auto pr-1 pb-1 max-w-full">
                 <div class="absolute inset-0 bg-primary-100 dark:bg-slate-700 rounded-xl translate-y-1 translate-x-1"></div>
-                <!-- Interactive Button Group container -->
-                <div class="relative flex bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-1.5 rounded-xl border border-slate-200 dark:border-slate-600 w-max max-w-full">
-                    <button onclick="switchTab('rekap')" id="btn-tab-rekap" class="whitespace-nowrap px-4 py-2 bg-primary-50 dark:bg-slate-700 rounded-lg text-sm font-bold text-primary dark:text-white shadow-sm transition-all flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">calendar_month</span> Rekap
+                <div class="relative flex bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-1.5 rounded-xl border border-slate-200 dark:border-slate-600">
+                    <button onclick="switchTab('rekap')" id="btn-tab-rekap" class="whitespace-nowrap px-3 sm:px-4 py-2 bg-primary-50 dark:bg-slate-700 rounded-lg text-sm font-bold text-primary dark:text-white shadow-sm transition-all flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                        <span class="hidden xs:inline sm:inline">Rekap</span>
                     </button>
-                    <button onclick="switchTab('anggota')" id="btn-tab-anggota" class="whitespace-nowrap px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">manage_accounts</span> Data Anggota
+                    <button onclick="switchTab('anggota')" id="btn-tab-anggota" class="whitespace-nowrap px-3 sm:px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[18px]">manage_accounts</span>
+                        <span class="hidden sm:inline">Data Anggota</span>
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================
+             CARD PENGATURAN
+             ============================== -->
+        <div class="relative group">
+            <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+            <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
+                <div class="px-6 py-5 flex flex-col gap-4">
+                    <!-- Baris 1: Judul -->
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 bg-primary-100 dark:bg-slate-700 rounded-2xl shrink-0 text-primary dark:text-primary-100">
+                            <span class="material-symbols-outlined" style="font-size:22px">timer</span>
+                        </div>
+                        <div>
+                            <h4 class="font-black text-slate-800 dark:text-white text-sm tracking-tight">Jeda Antar Scan</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">Waktu tunggu per anggota sebelum bisa di-scan ulang · berlaku di semua perangkat</p>
+                        </div>
+                    </div>
+                    <!-- Baris 2: Kontrol -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <!-- Input Jam + Menit -->
+                        <div class="flex items-center gap-2 shrink-0">
+                            <div class="flex flex-col items-center gap-0.5">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam</label>
+                                <input type="number" id="cooldown-hours" min="0" max="23" value="0"
+                                    class="w-16 text-center font-black text-primary text-lg border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5"
+                                    style="-moz-appearance:textfield; min-width:4rem;"
+                                >
+                            </div>
+                            <span class="font-black text-slate-300 text-xl mt-4">:</span>
+                            <div class="flex flex-col items-center gap-0.5">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Mnt</label>
+                                <input type="number" id="cooldown-minutes" min="0" max="59" value="10"
+                                    class="w-16 text-center font-black text-primary text-lg border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5"
+                                    style="-moz-appearance:textfield; min-width:4rem;"
+                                >
+                            </div>
+                        </div>
+                        <!-- Preset chips -->
+                        <div class="flex items-center gap-1 flex-wrap">
+                            <button onclick="setCooldown(0,5)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">5m</button>
+                            <button onclick="setCooldown(0,30)" class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">30m</button>
+                            <button onclick="setCooldown(1,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">1j</button>
+                            <button onclick="setCooldown(2,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">2j</button>
+                            <button onclick="setCooldown(4,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">4j</button>
+                            <button onclick="setCooldown(8,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">8j</button>
+                        </div>
+                        <!-- Tombol Simpan -->
+                        <button onclick="saveCooldownSetting()" id="btn-save-cooldown"
+                            class="flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary-light text-white text-xs font-bold rounded-xl shadow-md shadow-primary/20 transition-all hover:-translate-y-0.5 shrink-0">
+                            <span class="material-symbols-outlined" style="font-size:16px">save</span> Simpan
+                        </button>
+                        <span id="cooldown-saved-info" class="text-xs text-slate-400"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,12 +207,10 @@
         <!-- ==============================
              TAB: REKAPITULASI
              ============================== -->
-        <div id="tab-rekap" class="grid grid-cols-1 xl:grid-cols-12 gap-8 h-full">
-            
+        <div id="tab-rekap" class="tab-content aktif is-grid grid-cols-1 xl:grid-cols-12 gap-8 h-full">
             <!-- Left Column: Calendar (Large) -->
             <div class="xl:col-span-4 flex flex-col gap-6">
-                <!-- Stats Summary -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div class="relative group">
                         <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:hover:translate-y-2.5 md:hover:translate-x-2.5"></div>
                         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-5 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-0 transition-transform md:hover:-translate-y-1 md:hover:-translate-x-1">
@@ -163,6 +220,18 @@
                             <div class="flex flex-col">
                                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Hadir</span>
                                 <p class="text-3xl font-black text-slate-800 dark:text-white tracking-tight" id="stat-hadir">0 <span class="text-sm font-normal text-slate-400">/ 0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-blue-100/60 dark:bg-blue-900/30 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:group-hover:translate-y-2.5 md:group-hover:translate-x-2.5"></div>
+                        <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-5 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-blue-900/5 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-0 transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
+                            <div class="p-2.5 bg-blue-50 dark:bg-blue-900/50 text-blue-500 rounded-2xl mb-2">
+                                <span class="material-symbols-outlined text-2xl">assignment_late</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Izin</span>
+                                <p class="text-3xl font-black text-slate-800 dark:text-white tracking-tight" id="stat-izin">0 <span class="text-sm font-normal text-slate-400">org</span></p>
                             </div>
                         </div>
                     </div>
@@ -180,7 +249,6 @@
                     </div>
                 </div>
 
-                <!-- Calendar Card -->
                 <div class="relative group flex-1 min-h-[400px]">
                     <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                     <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden flex flex-col h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
@@ -209,7 +277,6 @@
                                 <div class="text-center text-[10px] font-bold text-slate-400 uppercase py-2">Sab</div>
                             </div>
                             <div class="grid grid-cols-7 gap-y-2 gap-x-2 flex-1" id="calendar-grid">
-                                <!-- JS will populate calendar days here -->
                             </div>
                         </div>
                     </div>
@@ -222,23 +289,32 @@
                     <div class="absolute inset-0 bg-slate-200/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                     <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-slate-900/5 overflow-hidden flex flex-col h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                         
-                        <!-- Header of List -->
-                        <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800/50 flex flex-col sm:flex-row justify-between sm:items-center gap-6">
-                            <div>
-                                <h3 class="font-black text-xl text-primary-dark dark:text-white flex items-center gap-3">
-                                    <span class="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-xl text-slate-600 material-symbols-outlined">history</span>
-                                    Riwayat Kehadiran
-                                </h3>
-                                <p class="text-sm text-slate-500 mt-1 sm:ml-12">Tanggal Terpilih: <span class="font-bold text-primary dark:text-primary-100" id="selected-date-text">-</span></p>
+                        <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800/50 flex flex-col gap-4">
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                                <div>
+                                    <h3 class="font-black text-xl text-primary-dark dark:text-white flex items-center gap-3">
+                                        <span class="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-xl text-slate-600 material-symbols-outlined">history</span>
+                                        Riwayat Kehadiran
+                                    </h3>
+                                    <p class="text-sm text-slate-500 mt-1 sm:ml-12">Tanggal Terpilih: <span class="font-bold text-primary dark:text-primary-100" id="selected-date-text">-</span></p>
+                                </div>
+                                <div class="relative w-full sm:w-64">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]">search</span>
+                                    <input id="search-input" class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all" placeholder="Cari nama anggota..." type="text"/>
+                                </div>
                             </div>
-                            <div class="relative w-full sm:w-64">
-                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]">search</span>
-                                <input id="search-input" class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all" placeholder="Cari nama anggota..." type="text"/>
+                            <!-- Filter chips Status Kehadiran -->
+                            <div class="flex flex-wrap gap-2 items-center">
+                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest shrink-0">Filter Status:</span>
+                                <button data-astatus="" onclick="setAdminStatusFilter(this)" class="admin-filter-status active-admin-filter px-3 py-1 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all">Semua</button>
+                                <button data-astatus="Hadir Penuh" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-green-500 hover:text-green-600 transition-all">Hadir Penuh</button>
+                                <button data-astatus="Hadir Setengah" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-yellow-500 hover:text-yellow-600 transition-all">Hadir Setengah</button>
+                                <button data-astatus="Izin" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-blue-500 hover:text-blue-600 transition-all">Izin</button>
+                                <button data-astatus="Tidak Hadir" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-red-500 hover:text-red-600 transition-all">Tidak Hadir</button>
                             </div>
                         </div>
 
-                        <!-- Table Container -->
-                        <div class="@container w-full overflow-x-auto flex-1">
+                        <div class="@container w-full overflow-x-auto overflow-y-auto max-h-[520px] flex-1">
                             <table class="w-full text-left border-collapse">
                                 <thead class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest sticky top-0 z-10">
                                 <tr>
@@ -257,19 +333,19 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
                 </div>
             </div>
-        </div> <!-- End of Tab Rekap -->
+        </div>
+        </div>
+    </div>
 
-        <!-- ==============================
+    <!-- ==============================
              TAB: KELOLA ANGGOTA
              ============================== -->
-        <div id="tab-anggota" class="hidden flex-col gap-6">
-            <div class="relative group min-h-[500px] flex flex-col">
+        <div id="tab-anggota" class="tab-content">
+            <div class="relative group flex flex-col">
                 <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
-                <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden flex flex-col h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
+                <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                     <div class="px-5 sm:px-8 py-5 sm:py-6 border-b border-primary-100/30 dark:border-slate-800/50 flex flex-col sm:flex-row justify-between items-center gap-4 w-full min-w-0">
                         <h3 class="font-black text-xl text-primary-dark dark:text-white flex items-center justify-center w-full sm:w-auto gap-3 text-center sm:text-left">
                             <span class="p-2 bg-primary-100 dark:bg-slate-700 rounded-xl text-primary material-symbols-outlined hidden sm:inline-block">group</span>
@@ -279,7 +355,7 @@
                             <span class="material-symbols-outlined text-[18px]">person_add</span> Tambah Anggota
                         </button>
                     </div>
-                    <div class="overflow-x-auto w-full flex-1">
+                    <div class="overflow-x-auto overflow-y-auto max-h-[520px] w-full">
                         <table class="w-full text-left border-collapse">
                             <thead class="bg-primary-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest">
                             <tr>
@@ -295,116 +371,138 @@
                     </table>
                 </div>
             </div>
-        </div> <!-- End of Tab Anggota -->
-
+        </div>
+    </div>
     </main>
+
 
     <!-- ==============================
          MODALS
          ============================== -->
     <!-- Modal Tambah Anggota -->
     <div id="modal-tambah" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" onclick="closeModalTambah()"></div>
-        <div class="bg-white dark:bg-surface-dark w-full max-w-md rounded-2xl shadow-2xl relative z-10 p-6 transform transition-all duration-200 scale-95 opacity-0" id="modal-tambah-content">
-            <div class="flex items-center justify-between mb-2">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Tambah Anggota Baru</h3>
-                <button onclick="closeModalTambah()" class="text-slate-400 hover:text-red-500 p-1 rounded-lg hover:bg-red-50 transition-colors">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Sistem terotomatisasi membuat token QR Identity bagi anggota baru yang terdaftar.</p>
-            
-            <form id="form-tambah-anggota" onsubmit="submitFormTambah(event)">
-                <div class="mb-4">
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Nama Lengkap Anggota</label>
-                    <input type="text" id="input-nama-anggota" required class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white focus:border-primary text-slate-900 dark:text-white font-medium placeholder-slate-400 transition-all" placeholder="Nama Lengkap Anggota">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Foto Profil (Opsional)</label>
-                    <input type="file" id="input-foto-anggota" accept="image/jpeg, image/png, image/webp" class="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
-                    <p class="text-xs text-slate-500 mt-1">Format: JPG, PNG, WEBP. Maks: 2MB.</p>
-                </div>
-                <div class="flex flex-col-reverse relative sm:flex-row gap-3 sm:justify-end">
-                    <button type="button" onclick="closeModalTambah()" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors">Batal</button>
-                    <button type="submit" id="btn-submit-anggota" class="px-5 py-2.5 rounded-lg text-sm font-bold text-white bg-primary hover:bg-blue-700 shadow-md shadow-blue-500/30 transition-all flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">app_registration</span> Daftarkan & Buat QR
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[4px]" onclick="closeModalTambah()"></div>
+        <div class="relative w-full max-w-md transform transition-all duration-300 scale-95 opacity-0" id="modal-tambah-content">
+            <div class="absolute inset-0 bg-primary-100/40 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-3 translate-x-3"></div>
+            <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 dark:border-slate-700 shadow-2xl overflow-hidden">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-2xl font-black text-slate-800 dark:text-white tracking-tight">Tambah Anggota</h3>
+                    <button onclick="closeModalTambah()" class="text-slate-400 hover:text-red-500 p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/30 transition-all">
+                        <span class="material-symbols-outlined">close</span>
                     </button>
                 </div>
-            </form>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-8">Sistem akan otomatis membuat QR Identity untuk anggota baru.</p>
+                
+                <form id="form-tambah-anggota" onsubmit="submitFormTambah(event)">
+                    <div class="mb-5">
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
+                        <input type="text" id="input-nama-anggota" required class="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-slate-900 dark:text-white font-medium transition-all" placeholder="Masukkan nama lengkap...">
+                    </div>
+                    <div class="mb-8">
+                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Foto Profil (Opsional)</label>
+                        <div class="relative group">
+                            <input type="file" id="input-foto-anggota" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                            <div class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-900/50 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl flex items-center justify-center gap-3 text-slate-500 group-hover:border-primary transition-all">
+                                <span class="material-symbols-outlined">add_a_photo</span>
+                                <span class="text-sm font-bold">Pilih File Foto</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col-reverse sm:flex-row gap-3">
+                        <button type="button" onclick="closeModalTambah()" class="flex-1 py-4.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all">Batal</button>
+                        <button type="submit" id="btn-submit-anggota" class="flex-[2] py-4.5 bg-primary hover:bg-primary-light text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">person_add</span> Simpan Anggota
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Modal Preview & Update Foto -->
     <div id="modal-foto" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" onclick="closeModalFoto()"></div>
-        <div class="bg-white dark:bg-surface-dark w-full max-w-sm rounded-2xl shadow-2xl relative z-10 p-6 transform transition-all duration-200 scale-95 opacity-0 flex flex-col items-center" id="modal-foto-content">
-            <button onclick="closeModalFoto()" class="absolute top-4 right-4 text-slate-400 hover:text-red-500 p-1 rounded-lg hover:bg-red-50 transition-colors">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-            
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 w-full text-center" id="preview-foto-nama">Foto Profil</h3>
-            
-            <div class="size-40 rounded-full bg-slate-100 relative mb-6 overflow-hidden border-4 border-white shadow-lg">
-                <img src="" id="preview-foto-img" alt="Foto Profil" class="w-full h-full object-cover">
-            </div>
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[4px]" onclick="closeModalFoto()"></div>
+        <div class="relative w-full max-w-sm transform transition-all duration-300 scale-95 opacity-0" id="modal-foto-content">
+            <div class="absolute inset-0 bg-primary-100/40 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-3 translate-x-3"></div>
+            <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 dark:border-slate-700 shadow-2xl flex flex-col items-center">
+                <button onclick="closeModalFoto()" class="absolute top-6 right-6 text-slate-400 hover:text-red-500 p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/30 transition-all">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 w-full text-center tracking-tight" id="preview-foto-nama">Foto Profil</h3>
+                
+                <div class="size-48 rounded-[2rem] bg-slate-100 dark:bg-slate-900 relative mb-8 overflow-hidden border-4 border-white dark:border-slate-700 shadow-xl rotate-3">
+                    <img src="" id="preview-foto-img" alt="Foto Profil" class="w-full h-full object-cover -rotate-3 transition-transform hover:scale-110 duration-500">
+                </div>
 
-            <form id="form-update-foto" class="w-full flex flex-col gap-3" onsubmit="submitFormUpdateFoto(event)">
-                <input type="hidden" id="update-foto-id">
-                <div class="relative w-full">
-                    <input type="file" id="update-foto-file" required accept="image/jpeg, image/png, image/webp" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="document.getElementById('file-name-display').textContent = this.files[0] ? this.files[0].name : 'Pilih Foto Baru...'">
-                    <div class="w-full px-4 py-3 bg-slate-50 border border-dashed border-slate-300 text-center rounded-xl flex items-center justify-center gap-2 text-slate-600 font-medium text-sm">
-                        <span class="material-symbols-outlined text-lg">upload_file</span>
-                        <span id="file-name-display">Pilih Foto Baru...</span>
+                <form id="form-update-foto" class="w-full flex flex-col gap-4" onsubmit="submitFormUpdateFoto(event)">
+                    <input type="hidden" id="update-foto-id">
+                    <div class="relative group">
+                        <input type="file" id="update-foto-file" required accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="document.getElementById('file-name-display').textContent = this.files[0] ? this.files[0].name : 'Ganti Foto Profil...'">
+                        <div class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-900/50 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl flex items-center justify-center gap-3 text-slate-500 group-hover:border-primary transition-all">
+                            <span class="material-symbols-outlined">upload_file</span>
+                            <span id="file-name-display" class="text-sm font-bold truncate">Ganti Foto Profil...</span>
+                        </div>
                     </div>
-                </div>
-                <div class="flex flex-col gap-2 w-full mt-2">
-                    <button type="submit" id="btn-submit-foto" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2 text-sm shadow-md">
-                        <span class="material-symbols-outlined text-[18px]">save</span> Simpan Foto Baru
-                    </button>
-                    <button type="button" id="btn-hapus-foto" onclick="deleteFotoAnggota()" class="w-full py-2.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-bold transition-colors flex items-center justify-center gap-2 text-sm border border-red-200">
-                        <span class="material-symbols-outlined text-[18px]">delete</span> Hapus Foto
-                    </button>
-                </div>
-            </form>
+                    <div class="flex flex-col gap-2 w-full pt-2">
+                        <button type="submit" id="btn-submit-foto" class="w-full py-4 bg-primary hover:bg-primary-light text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">save</span> Simpan Perubahan
+                        </button>
+                        <button type="button" id="btn-hapus-foto" onclick="deleteFotoAnggota()" class="w-full py-4 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl font-black text-xs uppercase tracking-widest transition-all hover:bg-red-100 dark:hover:bg-red-900/50 border border-red-100 dark:border-red-900/50 flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">delete</span> Hapus Foto
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Modal Zoom QR Code -->
     <div id="modal-qr" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm" onclick="closeModalQR()"></div>
-        <div class="bg-white dark:bg-surface-dark w-full max-w-sm rounded-3xl shadow-2xl relative z-10 p-8 transform transition-all duration-200 scale-95 opacity-0 flex flex-col items-center" id="modal-qr-content">
-            <button onclick="closeModalQR()" class="absolute top-4 right-4 text-slate-400 hover:text-red-500 p-1 rounded-lg hover:bg-red-50 transition-colors">
-                <span class="material-symbols-outlined">close</span>
-            </button>
+        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-[6px]" onclick="closeModalQR()"></div>
+        <div class="relative w-full max-w-sm transform transition-all duration-300 scale-95 opacity-0" id="modal-qr-content">
+            <div class="absolute inset-0 bg-primary-100/40 dark:bg-slate-700/50 rounded-[3rem] translate-y-4 translate-x-4"></div>
+            <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[3rem] p-10 border border-white/50 dark:border-slate-700 shadow-2xl flex flex-col items-center text-center">
+                <button onclick="closeModalQR()" class="absolute top-6 right-6 text-slate-400 hover:text-red-500 p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/30 transition-all">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
 
-            <div class="text-center mb-6 w-full">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white" id="zoom-qr-nama">Nama Anggota</h3>
-                <p class="text-xs text-slate-500 font-mono mt-1" id="zoom-qr-token">Token ID</p>
+                <div class="mb-8">
+                    <h3 class="text-2xl font-black text-slate-800 dark:text-white tracking-tight" id="zoom-qr-nama">Nama Anggota</h3>
+                    <p class="text-[10px] font-black text-primary dark:text-primary-100 uppercase tracking-widest mt-2 px-3 py-1 bg-primary-50 dark:bg-primary-900/30 rounded-full inline-block" id="zoom-qr-token">Token ID</p>
+                </div>
+
+                <div class="p-6 bg-white rounded-3xl shadow-inner border border-slate-100 mb-10 overflow-hidden group">
+                    <img src="" id="zoom-qr-img" alt="QR Code" class="size-64 object-contain transition-transform group-hover:scale-110 duration-500">
+                </div>
+
+                <a href="#" download="QR_Code.png" id="btn-download-qr" class="w-full py-4.5 bg-primary hover:bg-primary-light text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined text-lg">download</span> Unduh QR Identity
+                </a>
             </div>
-
-            <div class="p-4 bg-white border border-slate-200 shadow-sm rounded-2xl mb-8">
-                <img src="" id="zoom-qr-img" alt="QR Code Full" class="size-64 object-contain">
-            </div>
-
-            <a href="#" download="QR_Code.png" id="btn-download-qr" class="w-full py-3 bg-primary hover:bg-blue-700 text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30">
-                <span class="material-symbols-outlined text-lg">download</span>
-                Unduh QR Code
-            </a>
         </div>
     </div>
 
     <!-- Modal Konfirmasi Universal -->
     <div id="modal-confirm" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" onclick="closeConfirmModal()"></div>
-        <div class="bg-white dark:bg-surface-dark w-full max-w-sm rounded-2xl shadow-2xl relative z-10 p-6 transform transition-all duration-200 scale-95 opacity-0" id="modal-confirm-content">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2" id="confirm-title">Konfirmasi</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed" id="confirm-message">Apakah Anda yakin?</p>
-            
-            <div class="flex flex-col sm:flex-row gap-3 sm:justify-end w-full">
-                <button type="button" onclick="closeConfirmModal()" class="w-full sm:w-auto px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors">Batal</button>
-                <button type="button" id="btn-confirm-action" onclick="executeConfirm()" class="w-full sm:w-auto px-5 py-2.5 rounded-lg text-sm font-bold text-white shadow-md transition-all focus:ring-2 focus:outline-none">
-                    Ya, Lanjutkan
-                </button>
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[4px]" onclick="closeConfirmModal()"></div>
+        <div class="relative w-full max-w-sm transform transition-all duration-300 scale-95 opacity-0" id="modal-confirm-content">
+            <div id="confirm-pastel-layer" class="absolute inset-0 bg-red-100/40 dark:bg-red-900/30 rounded-[2.5rem] translate-y-3 translate-x-3 transition-colors duration-300"></div>
+            <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 dark:border-slate-700 shadow-2xl">
+                <div class="flex flex-col items-center text-center">
+                    <div id="confirm-icon-wrapper" class="p-4 bg-red-50 dark:bg-red-900/30 text-red-500 rounded-3xl mb-6 transition-colors duration-300">
+                        <span id="confirm-icon" class="material-symbols-outlined text-4xl">warning</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-800 dark:text-white mb-3 tracking-tight" id="confirm-title">Konfirmasi</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-8 leading-relaxed font-medium" id="confirm-message">Apakah Anda yakin ingin melanjutkan tindakan ini?</p>
+                    
+                    <div class="flex flex-col-reverse sm:flex-row gap-3 w-full">
+                        <button type="button" onclick="closeConfirmModal()" class="flex-1 py-4 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all">Batal</button>
+                        <button type="button" id="btn-confirm-action" onclick="executeConfirm()" class="flex-[1.5] py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-white shadow-xl transition-all hover:-translate-y-1 focus:ring-4 focus:outline-none">
+                            Ya, Lanjutkan
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -416,13 +514,28 @@
         function openConfirmModal(title, message, btnText, btnColorClass, callback) {
             const modal = document.getElementById('modal-confirm');
             const content = document.getElementById('modal-confirm-content');
+            const layer = document.getElementById('confirm-pastel-layer');
+            const iconWrap = document.getElementById('confirm-icon-wrapper');
+            const icon = document.getElementById('confirm-icon');
             
             document.getElementById('confirm-title').textContent = title;
-            document.getElementById('confirm-message').innerHTML = message; // Berjalan pake .innerHTML buat render <br> tag jika ada
+            document.getElementById('confirm-message').innerHTML = message;
             
+            // Dynamic styling based on purpose (Delete vs Confirm)
+            const isRed = btnColorClass.includes('bg-red');
+            if (isRed) {
+                layer.className = "absolute inset-0 bg-red-100/40 dark:bg-red-900/30 rounded-[2.5rem] translate-y-3 translate-x-3 transition-colors duration-300";
+                iconWrap.className = "p-4 bg-red-50 dark:bg-red-900/40 text-red-500 rounded-3xl mb-6 transition-colors duration-300";
+                icon.textContent = "warning";
+            } else {
+                layer.className = "absolute inset-0 bg-primary-100/40 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-3 translate-x-3 transition-colors duration-300";
+                iconWrap.className = "p-4 bg-primary-50 dark:bg-primary-900/30 text-primary rounded-3xl mb-6 transition-colors duration-300";
+                icon.textContent = "info";
+            }
+
             const btn = document.getElementById('btn-confirm-action');
             btn.textContent = btnText;
-            btn.className = `w-full sm:w-auto px-5 py-2.5 rounded-lg text-sm font-bold text-white shadow-md transition-all focus:ring-2 focus:outline-none ${btnColorClass}`;
+            btn.className = `flex-[1.5] py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-white shadow-xl transition-all hover:-translate-y-1 focus:ring-4 focus:outline-none ${btnColorClass}`;
             
             confirmCallback = callback;
 
@@ -469,8 +582,10 @@
         
         const elStatHadir = document.getElementById('stat-hadir');
         const elStatAbsen = document.getElementById('stat-absen');
+        const elStatIzin  = document.getElementById('stat-izin');
 
         let currentHistoryData = [];
+        let adminStatusFilter = '';  // '' = semua
 
         // Inisialisasi awal
         document.addEventListener('DOMContentLoaded', () => {
@@ -494,8 +609,21 @@
             });
         });
 
+        // Filter status admin (rekap)
+        function setAdminStatusFilter(btn) {
+            adminStatusFilter = btn.dataset.astatus;
+            document.querySelectorAll('.admin-filter-status').forEach(b => {
+                b.classList.remove('active-admin-filter', 'bg-primary', 'text-white', 'border-primary');
+                b.classList.add('border-slate-200', 'bg-white', 'dark:bg-slate-700');
+            });
+            btn.classList.add('active-admin-filter', 'bg-primary', 'text-white', 'border-primary');
+            btn.classList.remove('border-slate-200', 'bg-white', 'dark:bg-slate-700');
+            const term = elSearchInput.value.toLowerCase();
+            renderTable(currentHistoryData, term);
+        }
+
         // ==========================================
-        // 🗓️ RENDER KALENDER (Vanilla JS)
+        //  KALENDER
         // ==========================================
         function renderCalendar() {
             const year = currentDate.getFullYear();
@@ -554,13 +682,13 @@
         // 📡 FETCH API DAN PERHITUNGAN DATATABLE
         // ==========================================
         function fetchHistoryData(dateObj) {
-            // Format API butuh YYYY-MM-DD
+            // Format Tanggal API YYYY-MM-DD
             const yyyy = dateObj.getFullYear();
             const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
             const dd = String(dateObj.getDate()).padStart(2, '0');
             const formattedDate = `${yyyy}-${mm}-${dd}`;
 
-            // Update Teks Tanggal Terpilih (ID)
+            // Update Tanggal Terpilih (ID)
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             elSelectedDateText.textContent = dateObj.toLocaleDateString('id-ID', options);
 
@@ -577,16 +705,19 @@
                 .then(data => {
                     currentHistoryData = data.data || [];
                     
-                    // Update Stat Atas
+                    // Update Panel Total Kehadiran Dll
                     const totalAnggota = data.total_anggota || 0;
                     const hadir = (data.statistik.hadir_penuh || 0) + (data.statistik.hadir_setengah || 0);
-                    // Jumlahkan Alfa dari semua yang bukan Hadir
-                    const absen = (data.statistik.absen || 0) + (data.statistik.izin || 0) + (data.statistik.sakit || 0) + (data.statistik.cuti || 0);
+                    const izin  = data.statistik.izin || 0;
+                    // Tanpa keterangan = total - hadir - izin
+                    const absen = totalAnggota - hadir - izin;
                     
                     elStatHadir.innerHTML = `${hadir} <span class="text-xs font-normal text-slate-400">/ ${totalAnggota}</span>`;
-                    elStatAbsen.innerHTML = `${absen} <span class="text-xs font-normal text-slate-400">orang</span>`;
+                    elStatIzin.innerHTML  = `${izin} <span class="text-xs font-normal text-slate-400">org</span>`;
+                    elStatAbsen.innerHTML = `${absen >= 0 ? absen : 0} <span class="text-xs font-normal text-slate-400">org</span>`;
 
-                    renderTable(currentHistoryData, '');
+                    const term = elSearchInput.value.toLowerCase();
+                    renderTable(currentHistoryData, term);
                 })
                 .catch(err => {
                     console.error('Error fetching data:', err);
@@ -597,20 +728,23 @@
         function renderTable(dataArray, searchTerm = '') {
             elTableBody.innerHTML = '';
 
-            // Filter
+            let filtered = dataArray;
             if (searchTerm) {
-                dataArray = dataArray.filter(item => 
+                filtered = filtered.filter(item =>
                     item.nama.toLowerCase().includes(searchTerm)
                 );
             }
+            if (adminStatusFilter) {
+                filtered = filtered.filter(item => item.status_hari_ini === adminStatusFilter);
+            }
 
-            if (dataArray.length === 0) {
-                 elTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-slate-500">Tidak ada data kehadiran yang ditemukan.</td></tr>`;
+            if (filtered.length === 0) {
+                 elTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-slate-500">Tidak ada data yang cocok dengan filter.</td></tr>`;
                  return;
             }
 
             // Loop Data
-            dataArray.forEach(item => {
+            filtered.forEach(item => {
                 const safeName = item.nama ? String(item.nama).replace(/"/g, '&quot;').replace(/'/g, '&#39;') : "Tanpa Nama";
                 
                 // Tentukan Badge Status
@@ -625,13 +759,13 @@
                     statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 gap-1.5"><span class="material-symbols-outlined text-[14px]">cancel</span> Tidak Hadir</span>`;
                 }
 
-                // Format Tanggal (untuk dikirim ke update function)
+                // Format Tanggal
                 const yyyy = selectedDate.getFullYear();
                 const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
                 const dd = String(selectedDate.getDate()).padStart(2, '0');
                 const tglString = `${yyyy}-${mm}-${dd}`;
 
-                // Susun baris TR
+                // Susun baris Tabel (TR)
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group";
                 tr.innerHTML = `
@@ -686,27 +820,24 @@
         }
 
         // ==========================================
-        // 🛠️ FUNGSI AKSI & UPDATE MANUAL
+        // TOMBOL AKSI & UPDATE MANUAL BY ADMIN
         // ==========================================
         let currentMenuOpen = null;
 
         function toggleActionMenu(id) {
-            // Close old menu
             if (currentMenuOpen && currentMenuOpen !== `action-menu-${id}`) {
                 document.getElementById(currentMenuOpen).classList.add('hidden');
             }
             
-            // Toggle requested menu
             const menu = document.getElementById(`action-menu-${id}`);
             menu.classList.toggle('hidden');
             currentMenuOpen = menu.classList.contains('hidden') ? null : `action-menu-${id}`;
         }
 
-        // Close menu if clicked outside
         document.addEventListener('click', function(e) {
             if (currentMenuOpen) {
                 const btnClicked = e.target.closest('button[onclick^="toggleActionMenu"]');
-                const menuClicked = e.target.closest('.absolute.bg-white'); // Action menu container
+                const menuClicked = e.target.closest('.absolute.bg-white'); // Menu Container Untuk AKsi
                 
                 if (!btnClicked && !menuClicked) {
                     document.getElementById(currentMenuOpen).classList.add('hidden');
@@ -716,7 +847,6 @@
         });
 
         function deleteAttendanceLogs(anggotaId, tanggal, nama) {
-            // Close menu
             if(currentMenuOpen) document.getElementById(currentMenuOpen).classList.add('hidden');
             currentMenuOpen = null;
 
@@ -754,7 +884,6 @@
         }
 
         function updateManualStatus(anggotaId, tanggal, status) {
-            // Close menu
             if(currentMenuOpen) document.getElementById(currentMenuOpen).classList.add('hidden');
             currentMenuOpen = null;
 
@@ -764,7 +893,6 @@
                 'Ya, Ubah Status',
                 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
                 () => {
-                    // Memanggil API Backend (Laravel View -> API POST harus pakai CSRF kalau di session)
                     fetch("{{ url('api/update-status') }}", {
                         method: "POST",
                         headers: {
@@ -794,37 +922,31 @@
         }
 
         // ==========================================
-        // 🔄 TAB NAVIGATION
+        // TAB NAVIGATION
         // ==========================================
         function switchTab(tabId) {
-            const btnRekap = document.getElementById('btn-tab-rekap');
-            const btnAnggota = document.getElementById('btn-tab-anggota');
-            const tabRekap = document.getElementById('tab-rekap');
-            const tabAnggota = document.getElementById('tab-anggota');
+            const tabs = ['rekap', 'anggota'];
+            const activeStyle = "whitespace-nowrap px-3 sm:px-4 py-2 bg-white dark:bg-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white shadow-sm transition-all flex items-center gap-1.5";
+            const inactiveStyle = "whitespace-nowrap px-3 sm:px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg text-sm font-medium transition-all flex items-center gap-1.5";
 
-            if (tabId === 'rekap') {
-                tabRekap.classList.remove('hidden');
-                tabRekap.classList.add('grid');
-                tabAnggota.classList.add('hidden');
-                tabAnggota.classList.remove('flex');
+            tabs.forEach(tab => {
+                const elTab = document.getElementById(`tab-${tab}`);
+                const elBtn = document.getElementById(`btn-tab-${tab}`);
+                const isActive = tab === tabId;
 
-                btnRekap.className = "px-4 py-2 bg-white dark:bg-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white shadow-sm transition-all flex items-center gap-2";
-                btnAnggota.className = "px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2";
-            } else {
-                tabAnggota.classList.remove('hidden');
-                tabAnggota.classList.add('flex');
-                tabRekap.classList.add('hidden');
-                tabRekap.classList.remove('grid');
+                if (isActive) {
+                    elTab.classList.add('aktif');
+                } else {
+                    elTab.classList.remove('aktif');
+                }
+                if (elBtn) elBtn.className = isActive ? activeStyle : inactiveStyle;
+            });
 
-                btnAnggota.className = "px-4 py-2 bg-white dark:bg-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white shadow-sm transition-all flex items-center gap-2";
-                btnRekap.className = "px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2";
-
-                loadAnggotaData();
-            }
+            if (tabId === 'anggota') loadAnggotaData();
         }
 
         // ==========================================
-        // 👥 FITUR KELOLA ANGGOTA
+        // FITUR KELOLA ANGGOTA 
         // ==========================================
         const API_ANGGOTA_URL = "{{ url('api/anggota') }}";
         const elAnggotaTableBody = document.getElementById('anggota-table-body');
@@ -844,12 +966,11 @@
                 });
         }
 
-        // Function membuat SVG Inisial secara lokal dengan Base64 untuk mencegah bentrok Quote(Kutip)
+        // Function membuat SVG Inisial secara lokal
         const getSvgAvatar = (nama) => {
             const safeName = nama ? String(nama).trim() : "?";
             const initials = safeName.substring(0, 2).toUpperCase();
             const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200"><rect width="100" height="100" fill="#2463eb"/><text x="50" y="50" font-family="Inter, sans-serif" font-size="40" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="central">${initials}</text></svg>`;
-            // Convert to Base64 to remove all arbitrary quotes problem on HTML Attributes
             const base64Svg = btoa(unescape(encodeURIComponent(svg)));
             return `data:image/svg+xml;base64,${base64Svg}`;
         };
@@ -869,10 +990,10 @@
                 // Melindungi Nama dari XSS dan Syntax Error Kutip HTML
                 const safeName = item.nama ? String(item.nama).replace(/"/g, '&quot;').replace(/'/g, '&#39;') : "Tanpa Nama";
 
-                // QR Source rendering via API qrserver
+                // API QR SERVER
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(item.qr_code_token)}`;
                 
-                // Cek Foto (Jika null, fallback menggunakan dinamis inisial SVG Base64)
+                // Cek Foto (Jika Kosong maka menggunakan foto default / SVG)
                 const fotoSrc = item.foto && item.foto !== "" 
                                 ? `{{ asset('') }}${item.foto}` 
                                 : getSvgAvatar(item.nama);
@@ -941,7 +1062,6 @@
 
             if(!nama) return;
 
-            // Buat Form Data krn ada upload file
             let formData = new FormData();
             formData.append('nama', nama);
             if(fileInput.files.length > 0) {
@@ -956,7 +1076,7 @@
                 headers: {
                     "X-CSRF-TOKEN": "{{ csrf_token() }}"
                 },
-                body: formData // Body ini tidak usah JSON kalo pake FormData
+                body: formData
             })
             .then(res => res.json())
             .then(data => {
@@ -978,7 +1098,7 @@
         }
 
         // ==========================================
-        // 🖼️ MODUS PREVIEW FOTO + ZOOM QR
+        // MODUS PREVIEW FOTO + ZOOM QR
         // ==========================================
         function openModalFoto(id, nama, fotoSrc) {
             const modal = document.getElementById('modal-foto');
@@ -1089,7 +1209,7 @@
             );
         }
 
-        // QR Code Zoom Modal
+        // QR Code Modal
         function openModalQR(nama, token, srcUrl) {
             const modal = document.getElementById('modal-qr');
             const content = document.getElementById('modal-qr-content');
@@ -1098,17 +1218,17 @@
             document.getElementById('zoom-qr-token').textContent = token;
             document.getElementById('zoom-qr-img').src = srcUrl;
             
-            // Setup fitur Download Paksa (Force Download Image API eksternal tanpa mengarahkan tab baru)
+            // Download QR Code
             const btnDown = document.getElementById('btn-download-qr');
             
-            // Hapus event click sebelumnya jika ada (menggunakan cloneNode hack cepat)
+            // Hapus event click sebelumnya jika ada
             const newBtn = btnDown.cloneNode(true);
             btnDown.parentNode.replaceChild(newBtn, btnDown);
             
             newBtn.onclick = function(e) {
                 e.preventDefault();
                 
-                // Ubah teks saat mengunduh
+                // Ganti Nama file ketika QR di download
                 const originalHTML = newBtn.innerHTML;
                 newBtn.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">progress_activity</span> Mengunduh...';
                 newBtn.style.pointerEvents = 'none';
@@ -1116,12 +1236,12 @@
                 fetch(srcUrl)
                     .then(response => response.blob())
                     .then(blob => {
-                        // Buat link URL sementara (virtual)
+                        // Buat link URL sementara
                         const blobUrl = window.URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.style.display = 'none';
                         a.href = blobUrl;
-                        // Format Profesional: QRCode_Siabsen_[Nama_Anggota]_[ID].jpg
+                        // Format  QR : QRCode_Siabsen_[Nama_Anggota]_[ID].jpg
                         const safeNama = nama.trim().replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
                         a.download = `QRCode_Siabsen_${safeNama}_${token.substring(0, 8)}.jpg`;
                         
@@ -1168,7 +1288,6 @@
                 menu.classList.add('block', 'pointer-events-auto');
                 menu.classList.remove('pointer-events-none');
                 
-                // Allow browser to render display:block before starting animation
                 setTimeout(() => {
                     backdrop.classList.remove('opacity-0');
                     backdrop.classList.add('opacity-100');
@@ -1182,7 +1301,6 @@
                 drawer.classList.remove('translate-x-0');
                 drawer.classList.add('-translate-x-full');
                 
-                // Set hidden after animation finishes (300ms)
                 setTimeout(() => {
                     menu.classList.add('hidden', 'pointer-events-none');
                     menu.classList.remove('block', 'pointer-events-auto');
@@ -1218,6 +1336,98 @@
                 }
             );
         }
+        // ==========================================
+        // PENGATURAN COOLDOWN ANTAR SCAN (Server-Side)
+        // ==========================================
+        const CSRF = "{{ csrf_token() }}";
+
+        async function loadCooldownSetting() {
+            try {
+                const res = await fetch('/api/settings');
+                const json = await res.json();
+                const totalSec = json.data?.scan_cooldown_seconds ?? 600;
+                const h = Math.floor(totalSec / 3600);
+                const m = Math.floor((totalSec % 3600) / 60);
+                const elH = document.getElementById('cooldown-hours');
+                const elM = document.getElementById('cooldown-minutes');
+                const info = document.getElementById('cooldown-saved-info');
+                if (elH) elH.value = h;
+                if (elM) elM.value = m;
+                if (info) info.textContent = `Tersimpan: ${h > 0 ? h + 'j ' : ''}${m}m`;
+            } catch(e) { console.error('Gagal memuat pengaturan:', e); }
+        }
+
+        function setCooldown(hours, minutes) {
+            const elH = document.getElementById('cooldown-hours');
+            const elM = document.getElementById('cooldown-minutes');
+            if (elH) elH.value = hours;
+            if (elM) elM.value = minutes;
+        }
+
+        async function saveCooldownSetting() {
+            const elH = document.getElementById('cooldown-hours');
+            const elM = document.getElementById('cooldown-minutes');
+            const info = document.getElementById('cooldown-saved-info');
+            const saveBtn = document.getElementById('btn-save-cooldown');
+
+            const h = parseInt(elH?.value ?? 0) || 0;
+            const m = parseInt(elM?.value ?? 0) || 0;
+            const totalSec = (h * 3600) + (m * 60);
+
+            if (totalSec < 60) {
+                if (info) { info.style.color = '#ef4444'; info.textContent = '❌ Jeda minimal 1 menit!'; }
+                return;
+            }
+            if (totalSec > 86399) {
+                if (info) { info.style.color = '#ef4444'; info.textContent = '❌ Jeda maksimal dalam sehari (23j 59m)!'; }
+                return;
+            }
+
+            if (saveBtn) { saveBtn.disabled = true; saveBtn.style.opacity = '0.7'; saveBtn.textContent = 'Menyimpan...'; }
+
+            try {
+                const res = await fetch('/api/settings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': CSRF },
+                    body: JSON.stringify({ scan_cooldown_seconds: totalSec })
+                });
+                const json = await res.json();
+                if (json.status === 'success') {
+                    const label = `${h > 0 ? h + ' jam ' : ''}${m} menit`;
+                    if (info) {
+                        info.style.color = '#16a34a';
+                        info.textContent = `✅ Tersimpan: ${label}`;
+                        setTimeout(() => { if(info) { info.style.color='#94a3b8'; info.textContent=`Tersimpan: ${h > 0 ? h + 'j ' : ''}${m}m`; }}, 2500);
+                    }
+                }
+            } catch(e) {
+                if (info) { info.style.color='#ef4444'; info.textContent = '❌ Gagal menyimpan, coba lagi.'; }
+            } finally {
+                if (saveBtn) {
+                    saveBtn.disabled = false;
+                    saveBtn.style.opacity = '1';
+                    saveBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">save</span> Simpan';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => loadCooldownSetting());
     </script>
+
+    <!-- Footer -->
+    <footer class="bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg border-t border-white/50 dark:border-slate-800 mt-auto">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-center">
+            <p class="text-xs text-slate-400">
+                © {{ date('Y') }}
+                <a href="https://solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Pemerintah Kota Solok</a>
+                · Dikelola oleh
+                <a href="https://kominfo.solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Diskominfo Kota Solok</a>
+            </p>
+            <a href="{{ route('public.dashboard') }}" class="text-xs text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">fingerprint</span>
+                SIABSEN Kota Solok
+            </a>
+        </div>
+    </footer>
 </body>
 </html>

@@ -29,8 +29,11 @@ class DashboardController extends Controller
             ->where('tanggal', $today)
             ->orderBy('waktu_scan', 'desc')
             ->get();
+
+        $statusManuals = StatusManual::where('tanggal', $today)
+            ->get()
+            ->keyBy('anggota_id');
             
-        // Kalkulasi status kehadiran
         $anggotaIds = $logs->pluck('anggota_id')->unique();
         $statusHarian = [];
         
@@ -42,27 +45,31 @@ class DashboardController extends Controller
             if ($hasIn && $hasOut) {
                 $status = 'Hadir Penuh';
             } elseif ($hasIn || $hasOut) {
-                // If only one scan currently
                 $status = 'Hadir Setengah';
             } else {
                 $status = 'Tidak Hadir';
             }
+
+            if (isset($statusManuals[$pId])) {
+                $status = $statusManuals[$pId]->status;
+            }
+
             $statusHarian[$pId] = $status;
         }
 
         $formattedLogs = $logs->map(function ($log) use ($statusHarian) {
             return [
-                'id' => $log->id,
-                'nama' => $log->anggota->nama,
-                'waktu' => Carbon::parse($log->waktu_scan)->format('H:i'),
-                'tipe_absen' => $log->tipe_absen == 'IN' ? 'Datang' : 'Pulang',
-                'status_hari_ini' => $statusHarian[$log->anggota_id]
+                'id'             => $log->id,
+                'nama'           => $log->anggota->nama,
+                'waktu'          => Carbon::parse($log->waktu_scan)->format('H:i'),
+                'tipe_absen'     => $log->tipe_absen == 'IN' ? 'Datang' : 'Pulang',
+                'status_hari_ini'=> $statusHarian[$log->anggota_id]
             ];
         });
 
         return response()->json([
             'status' => 'success',
-            'data' => $formattedLogs
+            'data'   => $formattedLogs
         ]);
     }
 
@@ -100,7 +107,6 @@ class DashboardController extends Controller
             $waktuMasuk = $logIn ? Carbon::parse($logIn->waktu_scan)->format('H:i') : null;
             $waktuPulang = $logOut ? Carbon::parse($logOut->waktu_scan)->format('H:i') : null;
             
-            // Logika default dari scan mesin
             $status = 'Absen';
             if ($waktuMasuk && $waktuPulang) {
                 $status = 'Hadir Penuh';
@@ -108,13 +114,11 @@ class DashboardController extends Controller
                 $status = 'Hadir Setengah';
             }
             
-            // Timpa status jika ada entri Izin/Hadir/dll dari Admin manual
             if ($statusManual) {
                 // enum('Hadir Penuh', 'Hadir Setengah', 'Tidak Hadir', 'Izin')
                 $status = $statusManual->status; 
             }
 
-            // Hitung statistik final
             if ($status == 'Hadir Penuh') {
                 $statistik['hadir_penuh']++;
             } elseif ($status == 'Hadir Setengah') {
@@ -126,8 +130,6 @@ class DashboardController extends Controller
                 $statistik['absen']++;
             }
 
-            // Jika ada filter tertentu dari front-end (opsional) atau jika kita set default cuma kirim yg hadir
-            // Di sini kita kirim semuanya agar admin bisa filter di Data Table-nya
             $formattedLogs[] = [
                 'anggota_id' => $anggota->id,
                 'nama' => $anggota->nama,
@@ -156,12 +158,10 @@ class DashboardController extends Controller
         $anggotaId = $request->anggota_id;
         $tanggal = $request->tanggal;
 
-        // 1. Hapus semua Log Absensi (IN/OUT) di hari tersebut
         LogAbsensi::where('anggota_id', $anggotaId)
             ->where('tanggal', $tanggal)
             ->delete();
 
-        // 2. Hapus Status Manual (Override) jika ada di hari tersebut
         StatusManual::where('anggota_id', $anggotaId)
             ->where('tanggal', $tanggal)
             ->delete();
@@ -217,7 +217,6 @@ class DashboardController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048' // max 2MB
         ]);
 
-        // Generate ID Token Unik untuk QR Code
         $token = 'SQRS-' . time() . '-' . rand(1000, 9999);
         
         $fotoPath = null;
@@ -254,7 +253,6 @@ class DashboardController extends Controller
         }
 
         if($request->hasFile('foto')) {
-            // Hapus foto lama jika ada (dan bukan default)
             if($anggota->foto && file_exists(public_path($anggota->foto))) {
                 unlink(public_path($anggota->foto));
             }
@@ -285,12 +283,10 @@ class DashboardController extends Controller
             return response()->json(['status' => 'success', 'message' => 'Anggota memang tidak memiliki foto.']);
         }
 
-        // Menghapus file foto fisik
         if(file_exists(public_path($anggota->foto))) {
             unlink(public_path($anggota->foto));
         }
 
-        // Set foto null
         $anggota->foto = null;
         $anggota->save();
 
@@ -312,6 +308,50 @@ class DashboardController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Anggota berhasil dihapus.'
+        ]);
+    }
+
+    // ===============================================
+    // FITUR PENGATURAN SISTEM
+    // ===============================================
+
+    private function settingsFilePath()
+    {
+        return storage_path('app/siabsen_settings.json');
+    }
+
+    private function loadSettings()
+    {
+        $path = $this->settingsFilePath();
+        if (!file_exists($path)) {
+            return ['scan_cooldown_seconds' => 10];
+        }
+        return json_decode(file_get_contents($path), true) ?? ['scan_cooldown_seconds' => 10];
+    }
+
+    public function api_get_setting()
+    {
+        return response()->json([
+            'status' => 'success',
+            'data' => $this->loadSettings()
+        ]);
+    }
+
+    public function api_save_setting(Request $request)
+    {
+        $request->validate([
+            'scan_cooldown_seconds' => 'required|integer|min:1|max:86400'
+        ]);
+
+        $settings = $this->loadSettings();
+        $settings['scan_cooldown_seconds'] = (int) $request->scan_cooldown_seconds;
+
+        file_put_contents($this->settingsFilePath(), json_encode($settings, JSON_PRETTY_PRINT));
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pengaturan berhasil disimpan.',
+            'data' => $settings
         ]);
     }
 }

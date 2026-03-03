@@ -34,7 +34,6 @@ class ScannerController extends Controller
         $today = Carbon::today()->toDateString();
         $now = Carbon::now();
 
-        // Hitung jumlah log hari ini
         $logsToday = LogAbsensi::where('anggota_id', $anggota->id)
                                ->where('tanggal', $today)
                                ->orderBy('waktu_scan', 'asc')
@@ -43,7 +42,6 @@ class ScannerController extends Controller
         $count = $logsToday->count();
 
         if ($count >= 2) {
-            // Sudah IN dan OUT
             return response()->json([
                 'status' => 'warning',
                 'message' => "Absensi Lengkap! {$anggota->nama} sudah melakukan pindaian MASUK dan PULANG hari ini. Silakan kembali lagi besok."
@@ -51,14 +49,11 @@ class ScannerController extends Controller
         }
 
         if ($count == 1) {
-            // Sudah IN, maka sekarang OUT
             $tipe = 'OUT';
         } else {
-            // Belum ada log sama sekali hari ini
             $tipe = 'IN';
         }
 
-        // Simpan log
         LogAbsensi::create([
             'anggota_id' => $anggota->id,
             'waktu_scan' => $now,
@@ -68,7 +63,6 @@ class ScannerController extends Controller
 
         $statusText = $tipe == 'IN' ? 'MASUK' : 'PULANG';
 
-        // Kalkulasi status hari ini untuk kembalian
         $allLogsToday = LogAbsensi::where('anggota_id', $anggota->id)
                                 ->where('tanggal', $today)
                                 ->get();

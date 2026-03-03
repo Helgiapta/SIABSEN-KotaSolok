@@ -33,4 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/api/anggota/{id}/foto', [DashboardController::class, 'api_update_foto_anggota']);
     Route::delete('/api/anggota/{id}/foto', [DashboardController::class, 'api_delete_foto_anggota']);
     Route::delete('/api/anggota/{id}', [DashboardController::class, 'api_delete_anggota']);
+
+    // Pengaturan Sistem
+    Route::get('/api/settings', [DashboardController::class, 'api_get_setting']);
+    Route::post('/api/settings', [DashboardController::class, 'api_save_setting']);
 });

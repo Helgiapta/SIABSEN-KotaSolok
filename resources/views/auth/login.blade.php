@@ -39,15 +39,11 @@
 <body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
 
     <div class="relative group w-full max-w-md">
-        <!-- Stack Layer -->
         <div class="absolute inset-0 bg-primary-100/60 rounded-[2rem] translate-y-3 translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
         
-        <!-- Main Card -->
         <div class="relative bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-primary-dark/10 overflow-hidden border border-white flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
             
-            <!-- Header Branding -->
             <div class="bg-primary px-6 py-8 text-center relative overflow-hidden rounded-t-[2rem]">
-                <!-- Decorative circle -->
                 <div class="absolute -top-12 -right-12 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
                 <div class="absolute -bottom-8 -left-8 w-24 h-24 bg-primary-light/50 rounded-full blur-xl"></div>
                 
@@ -60,7 +56,6 @@
                 </div>
             </div>
 
-            <!-- Login Form -->
             <div class="p-8 pb-4">
                 <div class="mb-8 flex items-center justify-center gap-2 text-primary font-bold bg-primary-100 py-2 px-4 rounded-xl mx-auto w-max">
                     <span class="material-symbols-outlined text-[20px]">shield_person</span>
@@ -110,9 +105,17 @@
             </form>
         </div>
         
-        <!-- Footer -->
-        <div class="py-5 bg-slate-50 border-t border-slate-100 text-center rounded-b-[2rem]">
-            <p class="text-xs font-medium text-slate-400">&copy; {{ date('Y') }} Pemerintah Kota Solok</p>
+        <div class="py-5 bg-slate-50 border-t border-slate-100 text-center rounded-b-[2rem] px-4">
+            <p class="text-xs text-slate-400">
+                © {{ date('Y') }}
+                <a href="https://solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Pemerintah Kota Solok</a>
+            </p>
+            <p class="text-xs text-slate-400 mt-1">
+                Dikelola oleh
+                <a href="https://kominfo.solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Diskominfo Kota Solok</a>
+                ·
+                <a href="{{ route('public.dashboard') }}" class="hover:text-primary transition-colors font-medium">SIABSEN Kota Solok</a>
+            </p>
         </div>
         
     </div>

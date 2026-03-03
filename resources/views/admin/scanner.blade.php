@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" style="overflow-x: hidden;">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -60,7 +60,6 @@
             width: 100% !important;
             height: 100% !important;
         }
-        /* Hide html5-qrcode default UI elements */
         #reader__scan_region {
             border: none !important;
         }
@@ -78,7 +77,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-display min-h-screen flex flex-col">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-display min-h-screen flex flex-col overflow-x-hidden">
     
     <!-- Top Nav -->
     <header class="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/50 dark:border-slate-800 sticky top-0 z-50">
@@ -92,25 +91,24 @@
             
             <div id="connection-status" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
                 <span class="size-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                System Online
+                Online
             </div>
         </div>
     </header>
 
-    <main class="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 py-8">
+    <main class="flex-1 max-w-7xl mx-auto w-full p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 py-6 sm:py-8 overflow-hidden">
         
         <!-- Left: Scanner View (7 cols) -->
         <div class="lg:col-span-7 flex flex-col gap-6">
             <div class="relative group">
-                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-3 translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
-                <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] p-6 sm:p-10 border border-white dark:border-slate-700 shadow-2xl shadow-primary-dark/10 flex flex-col items-center transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
+                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-2 translate-x-2 sm:translate-y-3 sm:translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
+                <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] p-4 sm:p-6 lg:p-10 border border-white dark:border-slate-700 shadow-2xl shadow-primary-dark/10 flex flex-col items-center transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                     
-                    <!-- Decorative Elements -->
-                    <div class="absolute -top-24 -right-24 size-64 bg-primary-light/10 blur-[80px] rounded-full"></div>
+                    <!-- Decorative Elements (hidden on small screens to prevent overflow) -->
+                    <div class="absolute -top-24 -right-24 size-64 bg-primary-light/10 blur-[80px] rounded-full hidden sm:block"></div>
                     
                     <div class="w-full max-w-[500px] relative z-10 flex flex-col items-center">
                         <div class="w-full aspect-square relative rounded-[2rem] overflow-hidden bg-slate-50 dark:bg-slate-900 border-4 border-white dark:border-slate-800 shadow-inner group/scan">
-                            <!-- Custom Scan Overlay (UI ONLY) -->
                             <div id="scan-overlay" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
                                 <div class="size-64 sm:size-80 border-2 border-primary-100/40 rounded-[2rem] relative">
                                     <div class="absolute -top-1 -left-1 size-8 border-t-4 border-l-4 border-primary rounded-tl-2xl transition-all group-hover/scan:scale-110"></div>
@@ -164,7 +162,7 @@
         <!-- Right: Log Sidebar (5 cols) -->
         <div class="lg:col-span-5 flex flex-col gap-6 h-full">
             <div class="relative group h-full flex flex-col min-h-[500px]">
-                <div class="absolute inset-0 bg-slate-200/60 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-3 translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
+                <div class="absolute inset-0 bg-slate-200/60 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-2 translate-x-2 sm:translate-y-3 sm:translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
                 <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] border border-white dark:border-slate-700 shadow-2xl shadow-slate-900/10 flex flex-col h-full overflow-hidden transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                     <div class="p-8 border-b border-slate-100 dark:border-slate-800">
                         <div class="flex items-center justify-between mb-2">
@@ -175,7 +173,6 @@
                     </div>
                     
                     <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-4" id="log-list">
-                        <!-- Sample Log Item -->
                         <div class="p-12 text-center text-slate-400">
                             <span class="material-symbols-outlined text-[48px] opacity-20 mb-4">history</span>
                             <p class="text-sm font-medium">Belum ada aktivitas scan</p>
@@ -194,28 +191,43 @@
 
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm border-t border-white/30 dark:border-slate-800/50">
+        <div class="max-w-[1600px] mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-1 text-center">
+            <p class="text-xs text-slate-400">
+                © {{ date('Y') }}
+                <a href="https://solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Pemerintah Kota Solok</a>
+                · Dikelola oleh
+                <a href="https://kominfo.solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Diskominfo Kota Solok</a>
+            </p>
+            <a href="{{ route('public.dashboard') }}" class="text-xs text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">fingerprint</span>
+                SIABSEN Kota Solok
+            </a>
+        </div>
+    </footer>
+
     <!-- Custom Modal Result -->
-    <div id="modal-result" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
-        <div class="relative w-full max-w-md transform transition-all scale-95 opacity-0 duration-300" id="modal-content">
+    <div id="modal-result" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="relative w-full max-w-sm transform transition-all scale-95 opacity-0 duration-300" id="modal-content">
             <!-- Modal Stack Layer -->
-            <div class="absolute inset-0 bg-primary-100/80 rounded-[2.5rem] translate-y-3 translate-x-3" id="modal-stack-bg"></div>
-            <div class="relative bg-white/95 dark:bg-surface-dark w-full rounded-[2.5rem] border border-white shadow-2xl overflow-hidden p-8 flex flex-col items-center text-center">
+            <div class="absolute inset-0 bg-primary-100/80 rounded-[2rem] translate-y-2 translate-x-2" id="modal-stack-bg"></div>
+            <div class="relative bg-white/95 dark:bg-surface-dark w-full rounded-[2rem] border border-white shadow-2xl overflow-hidden p-6 flex flex-col items-center text-center">
                 <!-- Icon Circle -->
-                <div id="modal-icon-bg" class="size-24 rounded-full flex items-center justify-center mb-6 shadow-inner">
-                    <span id="modal-icon" class="material-symbols-outlined text-[48px]">check_circle</span>
+                <div id="modal-icon-bg" class="size-16 rounded-full flex items-center justify-center mb-4 shadow-inner">
+                    <span id="modal-icon" class="material-symbols-outlined text-[36px]">check_circle</span>
                 </div>
                 
-                <h3 id="modal-title" class="text-2xl font-black mb-2 tracking-tight">Pindaian Berhasil</h3>
-                <p id="modal-message" class="text-slate-500 font-medium dark:text-slate-400 leading-relaxed mb-8">Pesan akan muncul di sini.</p>
+                <h3 id="modal-title" class="text-xl font-black mb-1.5 tracking-tight">Pindaian Berhasil</h3>
+                <p id="modal-message" class="text-slate-500 text-sm font-medium dark:text-slate-400 leading-relaxed mb-6">Pesan akan muncul di sini.</p>
                 
-                <button onclick="closeResultModal()" class="w-full py-4 bg-slate-800 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold text-lg shadow-xl hover:-translate-y-1 transition-all active:scale-95">
+                <button onclick="closeResultModal()" class="w-full py-3 bg-slate-800 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-base shadow-xl hover:-translate-y-1 transition-all active:scale-95">
                     OKE, LANJUTKAN
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Success Sound (Admin discretion) -->
     <audio id="beep-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
 
     <script>
@@ -225,8 +237,14 @@
         
         let html5QrCode;
         let isScannerActive = false;
-        let lastScannedToken = null;
-        let scanningCooldown = false;
+        let currentFacingMode = 'environment';
+        let isProcessingScan = false;
+        const tokenCooldowns = new Map();
+        let COOLDOWN_MS = 10000;
+        fetch('/api/settings').then(r => r.json()).then(j => {
+            COOLDOWN_MS = (j.data?.scan_cooldown_seconds ?? 10) * 1000;
+        }).catch(() => {});
+        let countdownInterval = null;
 
         function playBeep() {
             try {
@@ -316,7 +334,6 @@
         function updateLogUI(data) {
             const list = document.getElementById('log-list');
             
-            // Remove empty state if present
             if (list.querySelector('.p-12')) {
                 list.innerHTML = '';
             }
@@ -356,7 +373,6 @@
             const titleEl = document.getElementById('modal-title');
             const messageEl = document.getElementById('modal-message');
 
-            // Reset classes
             iconBg.className = "size-20 rounded-full flex items-center justify-center mb-6 ";
             
             if (status === 'success') {
@@ -392,20 +408,71 @@
             content.classList.remove('scale-100', 'opacity-100');
             content.classList.add('scale-95', 'opacity-0');
 
+            isProcessingScan = false;
+            try { if (html5QrCode) html5QrCode.resume(); } catch(e) {}
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 300);
         }
 
-        async function onScanSuccess(decodedText, decodedResult) {
-            if (scanningCooldown) return;
-            
-            if (decodedText === lastScannedToken) return;
+        function formatDurasi(totalSec) {
+            const h = Math.floor(totalSec / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = totalSec % 60;
+            if (h > 0) {
+                return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+            }
+            return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        }
 
+        function showCooldownModal(nama, remainingSec) {
+            const title = `⏳ Tunggu ${formatDurasi(remainingSec)}`;
+            const message = `Anggota "${nama}" baru saja di-scan. Harap tunggu sebelum scan ulang.`;
+            showResultModal('warning', title, message);
+
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            countdownInterval = setInterval(() => {
+                const titleEl = document.getElementById('modal-title');
+                const modal = document.getElementById('modal-result');
+                if (!titleEl || modal.classList.contains('hidden')) {
+                    clearInterval(countdownInterval);
+                    return;
+                }
+                remainingSec--;
+                if (remainingSec <= 0) {
+                    clearInterval(countdownInterval);
+                    closeResultModal();
+                } else {
+                    titleEl.textContent = `⏳ Tunggu ${formatDurasi(remainingSec)}`;
+                }
+            }, 1000);
+        }
+
+        async function onScanSuccess(decodedText, decodedResult) {
+            if (isProcessingScan) return;
+            isProcessingScan = true;
+
+            try { if (html5QrCode) html5QrCode.pause(true); } catch(e) {}
+
+            const now = Date.now();
+            const expiryTime = tokenCooldowns.get(decodedText);
+
+            // Cek apakah token ini masih dalam masa cooldown
+            if (expiryTime && now < expiryTime) {
+                const remainingSec = Math.ceil((expiryTime - now) / 1000);
+                showCooldownModal(decodedText.substring(0, 8) + '...', remainingSec);
+                return;
+            }
+
+            tokenCooldowns.set(decodedText, now + COOLDOWN_MS);
             playBeep();
-            scanningCooldown = true;
-            lastScannedToken = decodedText;
 
             try {
                 const response = await fetch(API_SCAN_URL, {
@@ -431,15 +498,11 @@
                 console.error(err);
                 showResultModal('error', 'Koneksi Bermasalah', "Gagal terhubung ke server saat memproses scan.");
             } finally {
-                setTimeout(() => {
-                    scanningCooldown = false;
-                    lastScannedToken = null;
-                }, 3000); // 3 sec internal cooldown
+                setTimeout(() => { tokenCooldowns.delete(decodedText); }, COOLDOWN_MS);
             }
         }
 
-        async function startScanner() {
-            // Diagnostik Sederhana
+        async function startScanner(facingMode = 'environment') {
             if (!window.isSecureContext) {
                 showResultModal('error', 'Masalah Keamanan', "Browser mendeteksi koneksi ini tidak aman. Kamera hanya bisa dibuka lewat HTTPS/Localhost.");
                 return;
@@ -458,20 +521,30 @@
                 }
 
                 html5QrCode = new Html5Qrcode("reader");
+                currentFacingMode = facingMode;
+
                 const config = { 
                     fps: 20, 
                     aspectRatio: 1.0,
                     videoConstraints: {
-                        facingMode: "environment",
+                        facingMode: facingMode,
                         aspectRatio: { ideal: 1.0 }
                     }
                 };
 
                 await html5QrCode.start(
-                    { facingMode: "environment" }, 
+                    { facingMode: facingMode }, 
                     config, 
                     onScanSuccess
                 );
+
+                isScannerActive = true;
+
+                const btn = document.getElementById('btn-toggle-camera');
+                if (btn) {
+                    const label = btn.querySelector('span:last-child');
+                    if (label) label.textContent = facingMode === 'environment' ? 'Ganti ke Kamera Depan' : 'Ganti ke Kamera Belakang';
+                }
             } catch (err) {
                 console.error("Camera Error:", err);
                 showResultModal('error', 'Kamera Error', "Gagal mengakses kamera. Muat ulang (refresh) halaman lalu pastikan ijin kamera browser telah diberikan dan Anda tidak membukanya bersamaan dengan aplikasi lain.");
@@ -479,12 +552,22 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetchScannerLogs(); // Initial Load
-            startScanner(); // Initiate scanning instantly
+            fetchScannerLogs();
+            startScanner('environment');
             
-            document.getElementById('btn-toggle-camera').addEventListener('click', () => {
-                if (html5QrCode) {
-                    html5QrCode.stop().then(() => startScanner());
+            document.getElementById('btn-toggle-camera').addEventListener('click', async () => {
+                if (!html5QrCode) return;
+                const btn = document.getElementById('btn-toggle-camera');
+                if (btn) btn.disabled = true;
+                try {
+                    await html5QrCode.stop();
+                    isScannerActive = false;
+                    const nextMode = currentFacingMode === 'environment' ? 'user' : 'environment';
+                    await startScanner(nextMode);
+                } catch(e) {
+                    console.error('Ganti kamera error:', e);
+                } finally {
+                    if (btn) btn.disabled = false;
                 }
             });
         });
