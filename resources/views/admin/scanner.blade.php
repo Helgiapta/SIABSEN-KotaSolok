@@ -66,15 +66,11 @@
         #reader__dashboard {
             display: none !important;
         }
-        /* Important: hide the secondary internal box from the library */
         #reader img[alt="Info icon"], 
         #reader img[alt="Camera icon"] {
             display: none !important;
         }
-        /* This hides the default library scanning box */
-        div[id^="reader__scan_region"] > div {
-            display: none !important;
-        }
+
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-display min-h-screen flex flex-col overflow-x-hidden">
@@ -239,12 +235,6 @@
         let isScannerActive = false;
         let currentFacingMode = 'environment';
         let isProcessingScan = false;
-        const tokenCooldowns = new Map();
-        let COOLDOWN_MS = 10000;
-        fetch('/api/settings').then(r => r.json()).then(j => {
-            COOLDOWN_MS = (j.data?.scan_cooldown_seconds ?? 10) * 1000;
-        }).catch(() => {});
-        let countdownInterval = null;
 
         function playBeep() {
             try {
@@ -410,49 +400,11 @@
 
             isProcessingScan = false;
             try { if (html5QrCode) html5QrCode.resume(); } catch(e) {}
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-            }
 
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 300);
-        }
-
-        function formatDurasi(totalSec) {
-            const h = Math.floor(totalSec / 3600);
-            const m = Math.floor((totalSec % 3600) / 60);
-            const s = totalSec % 60;
-            if (h > 0) {
-                return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-            }
-            return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-        }
-
-        function showCooldownModal(nama, remainingSec) {
-            const title = `⏳ Tunggu ${formatDurasi(remainingSec)}`;
-            const message = `Anggota "${nama}" baru saja di-scan. Harap tunggu sebelum scan ulang.`;
-            showResultModal('warning', title, message);
-
-            if (countdownInterval) clearInterval(countdownInterval);
-
-            countdownInterval = setInterval(() => {
-                const titleEl = document.getElementById('modal-title');
-                const modal = document.getElementById('modal-result');
-                if (!titleEl || modal.classList.contains('hidden')) {
-                    clearInterval(countdownInterval);
-                    return;
-                }
-                remainingSec--;
-                if (remainingSec <= 0) {
-                    clearInterval(countdownInterval);
-                    closeResultModal();
-                } else {
-                    titleEl.textContent = `⏳ Tunggu ${formatDurasi(remainingSec)}`;
-                }
-            }, 1000);
         }
 
         async function onScanSuccess(decodedText, decodedResult) {
@@ -461,17 +413,6 @@
 
             try { if (html5QrCode) html5QrCode.pause(true); } catch(e) {}
 
-            const now = Date.now();
-            const expiryTime = tokenCooldowns.get(decodedText);
-
-            // Cek apakah token ini masih dalam masa cooldown
-            if (expiryTime && now < expiryTime) {
-                const remainingSec = Math.ceil((expiryTime - now) / 1000);
-                showCooldownModal(decodedText.substring(0, 8) + '...', remainingSec);
-                return;
-            }
-
-            tokenCooldowns.set(decodedText, now + COOLDOWN_MS);
             playBeep();
 
             try {
@@ -498,7 +439,8 @@
                 console.error(err);
                 showResultModal('error', 'Koneksi Bermasalah', "Gagal terhubung ke server saat memproses scan.");
             } finally {
-                setTimeout(() => { tokenCooldowns.delete(decodedText); }, COOLDOWN_MS);
+                // Short debounce to prevent immediate double scans before backend responds
+                setTimeout(() => { isProcessingScan = false; }, 2000);
             }
         }
 

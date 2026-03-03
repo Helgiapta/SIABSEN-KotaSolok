@@ -148,7 +148,7 @@
         </div>
 
         <!-- ==============================
-             CARD PENGATURAN
+             CARD PENGATURAN JAM KERJA
              ============================== -->
         <div class="relative group">
             <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
@@ -157,51 +157,57 @@
                     <!-- Baris 1: Judul -->
                     <div class="flex items-center gap-3">
                         <div class="p-2.5 bg-primary-100 dark:bg-slate-700 rounded-2xl shrink-0 text-primary dark:text-primary-100">
-                            <span class="material-symbols-outlined" style="font-size:22px">timer</span>
+                            <span class="material-symbols-outlined" style="font-size:22px">schedule</span>
                         </div>
                         <div>
-                            <h4 class="font-black text-slate-800 dark:text-white text-sm tracking-tight">Jeda Antar Scan</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">Waktu tunggu per anggota sebelum bisa di-scan ulang · berlaku di semua perangkat</p>
+                            <h4 class="font-black text-slate-800 dark:text-white text-sm tracking-tight">Pengaturan Jam Kerja</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">Batas waktu untuk melakukan scan presensi MASUK dan PULANG</p>
                         </div>
                     </div>
                     <!-- Baris 2: Kontrol -->
                     <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                        <!-- Input Jam + Menit -->
-                        <div class="flex items-center gap-2 shrink-0 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700">
-                            <div class="flex flex-col items-center gap-0.5">
-                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam</label>
-                                <input type="number" id="cooldown-hours" min="0" max="23" value="0"
-                                    class="w-20 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
+                        <!-- Input Jam Masuk -->
+                        <div class="flex flex-col items-start gap-1 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Masuk</label>
+                            <div class="flex items-center gap-1">
+                                <input type="number" id="masuk-h" min="0" max="23" value="06"
+                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
+                                    style="-moz-appearance:textfield;"
+                                >
+                                <span class="font-black text-slate-300 text-xl">:</span>
+                                <input type="number" id="masuk-m" min="0" max="59" value="00"
+                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
                                     style="-moz-appearance:textfield;"
                                 >
                             </div>
-                            <span class="font-black text-slate-300 text-xl mt-4">:</span>
-                            <div class="flex flex-col items-center gap-0.5">
-                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Mnt</label>
-                                <input type="number" id="cooldown-minutes" min="0" max="59" value="10"
-                                    class="w-20 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
+                        </div>
+
+                        <span class="font-black text-slate-300 text-xl hidden sm:block">-</span>
+                        
+                        <!-- Input Jam Pulang -->
+                        <div class="flex flex-col items-start gap-1 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Pulang</label>
+                            <div class="flex items-center gap-1">
+                                <input type="number" id="pulang-h" min="0" max="23" value="16"
+                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
+                                    style="-moz-appearance:textfield;"
+                                >
+                                <span class="font-black text-slate-300 text-xl">:</span>
+                                <input type="number" id="pulang-m" min="0" max="59" value="00"
+                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
                                     style="-moz-appearance:textfield;"
                                 >
                             </div>
                         </div>
                         
-                        <!-- Preset chips & Button Container -->
-                        <div class="flex flex-col sm:flex-row items-center gap-4 flex-1 lg:flex-none">
-                            <div class="flex items-center gap-1.5 flex-wrap justify-center">
-                                <button onclick="setCooldown(0,5)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">5m</button>
-                                <button onclick="setCooldown(0,30)" class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">30m</button>
-                                <button onclick="setCooldown(1,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">1j</button>
-                                <button onclick="setCooldown(2,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">2j</button>
-                                <button onclick="setCooldown(4,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">4j</button>
-                                <button onclick="setCooldown(8,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">8j</button>
-                            </div>
-                            
+                        <!-- Button Container -->
+                        <div class="flex flex-col sm:flex-row items-center gap-4 flex-1 lg:flex-none ml-auto">
                             <div class="flex items-center gap-3">
-                                <button onclick="saveCooldownSetting()" id="btn-save-cooldown"
+                                <button onclick="saveWorkHoursSetting()" id="btn-save-workhours"
                                     class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-light text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95">
                                     <span class="material-symbols-outlined shrink-0" style="font-size:18px">save</span> Simpan
                                 </button>
-                                <span id="cooldown-saved-info" class="text-xs font-bold text-slate-400"></span>
+                                <span id="setting-saved-info" class="text-xs font-bold text-slate-400"></span>
                             </div>
                         </div>
                     </div>
@@ -1342,51 +1348,52 @@
             );
         }
         // ==========================================
-        // PENGATURAN COOLDOWN ANTAR SCAN (Server-Side)
+        // PENGATURAN JAM KERJA (Server-Side)
         // ==========================================
         const CSRF = "{{ csrf_token() }}";
 
-        async function loadCooldownSetting() {
+        async function loadWorkHoursSetting() {
             try {
                 const res = await fetch('/api/settings');
                 const json = await res.json();
-                const totalSec = json.data?.scan_cooldown_seconds ?? 600;
-                const h = Math.floor(totalSec / 3600);
-                const m = Math.floor((totalSec % 3600) / 60);
-                const elH = document.getElementById('cooldown-hours');
-                const elM = document.getElementById('cooldown-minutes');
-                const info = document.getElementById('cooldown-saved-info');
-                if (elH) elH.value = h;
-                if (elM) elM.value = m;
-                if (info) info.textContent = `Tersimpan: ${h > 0 ? h + 'j ' : ''}${m}m`;
+                
+                const jamMasuk = json.data?.jam_masuk || '06:00';
+                const jamPulang = json.data?.jam_pulang || '16:00';
+
+                const [mh, mm] = jamMasuk.split(':');
+                const [ph, pm] = jamPulang.split(':');
+
+                const elMh = document.getElementById('masuk-h');
+                const elMm = document.getElementById('masuk-m');
+                const elPh = document.getElementById('pulang-h');
+                const elPm = document.getElementById('pulang-m');
+
+                if (elMh) elMh.value = mh;
+                if (elMm) elMm.value = mm;
+                if (elPh) elPh.value = ph;
+                if (elPm) elPm.value = pm;
+
+                const info = document.getElementById('setting-saved-info');
+                if (info) info.textContent = `Tersimpan: ${jamMasuk} - ${jamPulang}`;
             } catch(e) { console.error('Gagal memuat pengaturan:', e); }
         }
 
-        function setCooldown(hours, minutes) {
-            const elH = document.getElementById('cooldown-hours');
-            const elM = document.getElementById('cooldown-minutes');
-            if (elH) elH.value = hours;
-            if (elM) elM.value = minutes;
-        }
+        async function saveWorkHoursSetting() {
+            let mh = document.getElementById('masuk-h')?.value || '06';
+            let mm = document.getElementById('masuk-m')?.value || '00';
+            let ph = document.getElementById('pulang-h')?.value || '16';
+            let pm = document.getElementById('pulang-m')?.value || '00';
 
-        async function saveCooldownSetting() {
-            const elH = document.getElementById('cooldown-hours');
-            const elM = document.getElementById('cooldown-minutes');
-            const info = document.getElementById('cooldown-saved-info');
-            const saveBtn = document.getElementById('btn-save-cooldown');
+            mh = mh.padStart(2, '0');
+            mm = mm.padStart(2, '0');
+            ph = ph.padStart(2, '0');
+            pm = pm.padStart(2, '0');
 
-            const h = parseInt(elH?.value ?? 0) || 0;
-            const m = parseInt(elM?.value ?? 0) || 0;
-            const totalSec = (h * 3600) + (m * 60);
+            const jamMasuk = `${mh}:${mm}`;
+            const jamPulang = `${ph}:${pm}`;
 
-            if (totalSec < 60) {
-                if (info) { info.style.color = '#ef4444'; info.textContent = '❌ Jeda minimal 1 menit!'; }
-                return;
-            }
-            if (totalSec > 86399) {
-                if (info) { info.style.color = '#ef4444'; info.textContent = '❌ Jeda maksimal dalam sehari (23j 59m)!'; }
-                return;
-            }
+            const info = document.getElementById('setting-saved-info');
+            const saveBtn = document.getElementById('btn-save-workhours');
 
             if (saveBtn) { saveBtn.disabled = true; saveBtn.style.opacity = '0.7'; saveBtn.textContent = 'Menyimpan...'; }
 
@@ -1394,15 +1401,14 @@
                 const res = await fetch('/api/settings', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': CSRF },
-                    body: JSON.stringify({ scan_cooldown_seconds: totalSec })
+                    body: JSON.stringify({ jam_masuk: jamMasuk, jam_pulang: jamPulang })
                 });
                 const json = await res.json();
                 if (json.status === 'success') {
-                    const label = `${h > 0 ? h + ' jam ' : ''}${m} menit`;
                     if (info) {
                         info.style.color = '#16a34a';
-                        info.textContent = `✅ Tersimpan: ${label}`;
-                        setTimeout(() => { if(info) { info.style.color='#94a3b8'; info.textContent=`Tersimpan: ${h > 0 ? h + 'j ' : ''}${m}m`; }}, 2500);
+                        info.textContent = `✅ Tersimpan: ${jamMasuk} - ${jamPulang}`;
+                        setTimeout(() => { if(info) { info.style.color='#94a3b8'; info.textContent=`Tersimpan: ${jamMasuk} - ${jamPulang}`; }}, 2500);
                     }
                 }
             } catch(e) {
@@ -1416,7 +1422,7 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => loadCooldownSetting());
+        document.addEventListener('DOMContentLoaded', () => loadWorkHoursSetting());
     </script>
 
     <!-- Footer -->

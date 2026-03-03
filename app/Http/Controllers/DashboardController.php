@@ -323,10 +323,17 @@ class DashboardController extends Controller
     private function loadSettings()
     {
         $path = $this->settingsFilePath();
+        $defaultSettings = [
+            'jam_masuk' => '06:00',
+            'jam_pulang' => '16:00'
+        ];
+        
         if (!file_exists($path)) {
-            return ['scan_cooldown_seconds' => 10];
+            return $defaultSettings;
         }
-        return json_decode(file_get_contents($path), true) ?? ['scan_cooldown_seconds' => 10];
+        
+        $settings = json_decode(file_get_contents($path), true);
+        return array_merge($defaultSettings, $settings ?? []);
     }
 
     public function api_get_setting()
@@ -340,17 +347,19 @@ class DashboardController extends Controller
     public function api_save_setting(Request $request)
     {
         $request->validate([
-            'scan_cooldown_seconds' => 'required|integer|min:1|max:86400'
+            'jam_masuk' => 'required|date_format:H:i',
+            'jam_pulang' => 'required|date_format:H:i'
         ]);
 
         $settings = $this->loadSettings();
-        $settings['scan_cooldown_seconds'] = (int) $request->scan_cooldown_seconds;
+        $settings['jam_masuk'] = $request->jam_masuk;
+        $settings['jam_pulang'] = $request->jam_pulang;
 
         file_put_contents($this->settingsFilePath(), json_encode($settings, JSON_PRETTY_PRINT));
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Pengaturan berhasil disimpan.',
+            'message' => 'Pengaturan jam kerja berhasil disimpan.',
             'data' => $settings
         ]);
     }
