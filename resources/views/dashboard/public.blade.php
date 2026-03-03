@@ -97,13 +97,9 @@
             <h2 class="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white tracking-tight" id="page-title">Dashboard Publik</h2>
             <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1" id="page-subtitle">Informasi kehadiran secara real-time</p>
         </div>
-        <div class="relative group self-center lg:self-auto">
-            <div class="absolute inset-0 bg-primary-100 dark:bg-slate-700 rounded-xl translate-y-1 translate-x-1"></div>
-            <div class="relative flex bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-1.5 rounded-xl border border-white dark:border-slate-700">
-                <button class="whitespace-nowrap px-4 py-2 bg-primary-50 dark:bg-slate-700 rounded-lg text-sm font-bold text-primary dark:text-primary-100 shadow-sm flex items-center gap-2 cursor-default">
-                    <span class="material-symbols-outlined text-[18px]">public</span> Publik Panel
-                </button>
-            </div>
+        <div class="flex items-center gap-2 px-4 py-2 bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-600 dark:text-slate-300 font-black text-[11px] uppercase tracking-[0.15em] shrink-0">
+            <span class="material-symbols-outlined text-[18px]">public</span>
+            <span>Publik Panel</span>
         </div>
     </div>
 
