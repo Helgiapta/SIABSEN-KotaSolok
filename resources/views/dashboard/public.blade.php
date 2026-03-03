@@ -236,14 +236,14 @@
                 </div>
             </div>
             
-            <div class="overflow-x-auto min-h-[400px]">
+            <div class="overflow-x-auto overflow-y-auto max-h-[600px] scroll-smooth">
                 <table class="w-full text-left border-collapse">
-                    <thead class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest sticky top-0 z-10">
+                    <thead class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest sticky top-0 z-20 backdrop-blur-md">
                     <tr>
-                        <th class="px-4 sm:px-6 py-4 rounded-tl-lg min-w-[200px]">Anggota</th>
-                        <th class="px-4 py-4 text-center">Status Scan</th>
-                        <th class="px-4 py-4 text-center">Waktu</th>
-                        <th class="px-4 py-4 text-center rounded-tr-lg">Status Hari Ini</th>
+                        <th class="px-4 sm:px-6 py-4 min-w-[200px] bg-slate-50/80 dark:bg-slate-800/80">Anggota</th>
+                        <th class="px-4 py-4 text-center bg-slate-50/80 dark:bg-slate-800/80">Status Scan</th>
+                        <th class="px-4 py-4 text-center bg-slate-50/80 dark:bg-slate-800/80">Waktu</th>
+                        <th class="px-4 py-4 text-center bg-slate-50/80 dark:bg-slate-800/80">Status Hari Ini</th>
                     </tr>
                 </thead>
                 <tbody id="attendance-table-body" class="divide-y divide-slate-100 dark:divide-slate-700">
