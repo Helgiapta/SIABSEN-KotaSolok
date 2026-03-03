@@ -171,13 +171,11 @@
                             <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Masuk</label>
                             <div class="flex items-center gap-1">
                                 <input type="number" id="masuk-h" min="0" max="23" value="06"
-                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
-                                    style="-moz-appearance:textfield;"
+                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
                                 >
                                 <span class="font-black text-slate-300 text-xl">:</span>
                                 <input type="number" id="masuk-m" min="0" max="59" value="00"
-                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
-                                    style="-moz-appearance:textfield;"
+                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
                                 >
                             </div>
                         </div>
@@ -189,13 +187,11 @@
                             <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Pulang</label>
                             <div class="flex items-center gap-1">
                                 <input type="number" id="pulang-h" min="0" max="23" value="16"
-                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
-                                    style="-moz-appearance:textfield;"
+                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
                                 >
                                 <span class="font-black text-slate-300 text-xl">:</span>
                                 <input type="number" id="pulang-m" min="0" max="59" value="00"
-                                    class="w-14 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
-                                    style="-moz-appearance:textfield;"
+                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
                                 >
                             </div>
                         </div>
