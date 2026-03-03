@@ -213,18 +213,26 @@
                     </div>
                 </div>
                 <!-- Baris 2: Filter chips -->
-                <div class="flex flex-wrap gap-2 items-center">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest shrink-0">Status Scan:</span>
-                    <button data-scan="" onclick="setScanFilter(this)" class="filter-scan active-filter px-3 py-1 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all">Semua</button>
-                    <button data-scan="Datang" onclick="setScanFilter(this)" class="filter-scan px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-all">IN (Datang)</button>
-                    <button data-scan="Pulang" onclick="setScanFilter(this)" class="filter-scan px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary transition-all">OUT (Pulang)</button>
-                    <span class="text-slate-200 mx-1">|</span>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest shrink-0">Status Kehadiran:</span>
-                    <button data-status="" onclick="setStatusFilter(this)" class="filter-status active-filter px-3 py-1 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all">Semua</button>
-                    <button data-status="Hadir Penuh" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-green-500 hover:text-green-600 transition-all">Hadir Penuh</button>
-                    <button data-status="Hadir Setengah" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-yellow-500 hover:text-yellow-600 transition-all">Hadir Setengah</button>
-                    <button data-status="Izin" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-blue-500 hover:text-blue-600 transition-all">Izin</button>
-                    <button data-status="Tidak Hadir" onclick="setStatusFilter(this)" class="filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-red-500 hover:text-red-600 transition-all">Tidak Hadir</button>
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] shrink-0 mr-1">Status Scan:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button data-scan="" onclick="setScanFilter(this)" class="filter-scan active-filter px-4 py-1.5 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all shadow-sm active:scale-95">Semua</button>
+                            <button data-scan="Datang" onclick="setScanFilter(this)" class="filter-scan px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">IN (Datang)</button>
+                            <button data-scan="Pulang" onclick="setScanFilter(this)" class="filter-scan px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">OUT (Pulang)</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] shrink-0 mr-1">Kehadiran:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button data-status="" onclick="setStatusFilter(this)" class="filter-status active-filter px-4 py-1.5 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all shadow-sm active:scale-95">Semua</button>
+                            <button data-status="Hadir Penuh" onclick="setStatusFilter(this)" class="filter-status px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-green-500 hover:text-green-600 transition-all shadow-sm active:scale-95">Hadir</button>
+                            <button data-status="Hadir Setengah" onclick="setStatusFilter(this)" class="filter-status px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-yellow-500 hover:text-yellow-600 transition-all shadow-sm active:scale-95">Setengah</button>
+                            <button data-status="Izin" onclick="setStatusFilter(this)" class="filter-status px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-blue-500 hover:text-blue-600 transition-all shadow-sm active:scale-95">Izin</button>
+                            <button data-status="Tidak Hadir" onclick="setStatusFilter(this)" class="filter-status px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-red-500 hover:text-red-600 transition-all shadow-sm active:scale-95">Absen</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             

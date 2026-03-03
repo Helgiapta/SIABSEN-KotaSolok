@@ -165,13 +165,13 @@
                         </div>
                     </div>
                     <!-- Baris 2: Kontrol -->
-                    <div class="flex flex-wrap items-center gap-2">
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
                         <!-- Input Jam + Menit -->
-                        <div class="flex items-center gap-2 shrink-0">
+                        <div class="flex items-center gap-2 shrink-0 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-2xl border border-slate-100 dark:border-slate-700">
                             <div class="flex flex-col items-center gap-0.5">
                                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam</label>
                                 <input type="number" id="cooldown-hours" min="0" max="23" value="0"
-                                    class="w-16 text-center font-black text-primary text-lg border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5"
+                                    class="w-16 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
                                     style="-moz-appearance:textfield; min-width:4rem;"
                                 >
                             </div>
@@ -179,26 +179,31 @@
                             <div class="flex flex-col items-center gap-0.5">
                                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Mnt</label>
                                 <input type="number" id="cooldown-minutes" min="0" max="59" value="10"
-                                    class="w-16 text-center font-black text-primary text-lg border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5"
+                                    class="w-16 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
                                     style="-moz-appearance:textfield; min-width:4rem;"
                                 >
                             </div>
                         </div>
-                        <!-- Preset chips -->
-                        <div class="flex items-center gap-1 flex-wrap">
-                            <button onclick="setCooldown(0,5)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">5m</button>
-                            <button onclick="setCooldown(0,30)" class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">30m</button>
-                            <button onclick="setCooldown(1,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">1j</button>
-                            <button onclick="setCooldown(2,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">2j</button>
-                            <button onclick="setCooldown(4,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">4j</button>
-                            <button onclick="setCooldown(8,0)"  class="px-2.5 py-1 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all">8j</button>
+                        
+                        <!-- Preset chips & Button Container -->
+                        <div class="flex flex-col sm:flex-row items-center gap-4 flex-1 lg:flex-none">
+                            <div class="flex items-center gap-1.5 flex-wrap justify-center">
+                                <button onclick="setCooldown(0,5)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">5m</button>
+                                <button onclick="setCooldown(0,30)" class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">30m</button>
+                                <button onclick="setCooldown(1,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">1j</button>
+                                <button onclick="setCooldown(2,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">2j</button>
+                                <button onclick="setCooldown(4,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">4j</button>
+                                <button onclick="setCooldown(8,0)"  class="px-3 py-1.5 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 hover:bg-primary-100 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95">8j</button>
+                            </div>
+                            
+                            <div class="flex items-center gap-3">
+                                <button onclick="saveCooldownSetting()" id="btn-save-cooldown"
+                                    class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-light text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95">
+                                    <span class="material-symbols-outlined shrink-0" style="font-size:18px">save</span> Simpan
+                                </button>
+                                <span id="cooldown-saved-info" class="text-xs font-bold text-slate-400"></span>
+                            </div>
                         </div>
-                        <!-- Tombol Simpan -->
-                        <button onclick="saveCooldownSetting()" id="btn-save-cooldown"
-                            class="flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary-light text-white text-xs font-bold rounded-xl shadow-md shadow-primary/20 transition-all hover:-translate-y-0.5 shrink-0">
-                            <span class="material-symbols-outlined" style="font-size:16px">save</span> Simpan
-                        </button>
-                        <span id="cooldown-saved-info" class="text-xs text-slate-400"></span>
                     </div>
                 </div>
             </div>
