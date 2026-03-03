@@ -171,16 +171,16 @@
                             <div class="flex flex-col items-center gap-0.5">
                                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam</label>
                                 <input type="number" id="cooldown-hours" min="0" max="23" value="0"
-                                    class="w-16 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
-                                    style="-moz-appearance:textfield; min-width:4rem;"
+                                    class="w-20 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
+                                    style="-moz-appearance:textfield;"
                                 >
                             </div>
                             <span class="font-black text-slate-300 text-xl mt-4">:</span>
                             <div class="flex flex-col items-center gap-0.5">
                                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Mnt</label>
                                 <input type="number" id="cooldown-minutes" min="0" max="59" value="10"
-                                    class="w-16 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
-                                    style="-moz-appearance:textfield; min-width:4rem;"
+                                    class="w-20 text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm"
+                                    style="-moz-appearance:textfield;"
                                 >
                             </div>
                         </div>
