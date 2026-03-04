@@ -186,7 +186,7 @@
 
         <!-- Card Pengaturan Jam Kerja -->
         <div class="relative group">
-            <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+            <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
             <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                 <div class="px-5 py-4 flex flex-col sm:px-6 sm:py-5 gap-3 md:gap-4">
                     <div class="flex items-center gap-2 sm:gap-3">
@@ -247,9 +247,9 @@
             <div class="xl:col-span-4 flex flex-col gap-6">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div class="relative group">
-                        <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:hover:translate-y-2.5 md:hover:translate-x-2.5"></div>
+                        <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:hover:translate-y-2.5 md:hover:translate-x-2.5"></div>
                         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-5 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-0 transition-transform md:hover:-translate-y-1 md:hover:-translate-x-1">
-                            <div class="p-2.5 bg-primary-100 dark:bg-slate-700 text-primary dark:text-primary-100 rounded-2xl mb-2">
+                            <div class="p-2.5 bg-primary-100 dark:bg-slate-900/50 text-primary dark:text-primary-100 rounded-2xl mb-2">
                                 <span class="material-symbols-outlined text-2xl">how_to_reg</span>
                             </div>
                             <div class="flex flex-col">
@@ -259,9 +259,9 @@
                         </div>
                     </div>
                     <div class="relative group">
-                        <div class="absolute inset-0 bg-blue-100/60 dark:bg-blue-900/30 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:group-hover:translate-y-2.5 md:group-hover:translate-x-2.5"></div>
+                        <div class="absolute inset-0 bg-blue-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:group-hover:translate-y-2.5 md:group-hover:translate-x-2.5"></div>
                         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-5 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-blue-900/5 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-0 transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                            <div class="p-2.5 bg-blue-50 dark:bg-blue-900/50 text-blue-500 rounded-2xl mb-2">
+                            <div class="p-2.5 bg-blue-50 dark:bg-slate-900/50 text-blue-500 rounded-2xl mb-2">
                                 <span class="material-symbols-outlined text-2xl">assignment_late</span>
                             </div>
                             <div class="flex flex-col">
@@ -271,9 +271,9 @@
                         </div>
                     </div>
                     <div class="relative group">
-                        <div class="absolute inset-0 bg-red-100/60 dark:bg-red-900/30 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:group-hover:translate-y-2.5 md:group-hover:translate-x-2.5"></div>
+                        <div class="absolute inset-0 bg-red-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:group-hover:translate-y-2.5 md:group-hover:translate-x-2.5"></div>
                         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-5 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-red-900/5 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-0 transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                            <div class="p-2.5 bg-red-50 dark:bg-red-900/50 text-red-500 rounded-2xl mb-2">
+                            <div class="p-2.5 bg-red-50 dark:bg-slate-900/50 text-red-500 rounded-2xl mb-2">
                                 <span class="material-symbols-outlined text-2xl">person_off</span>
                             </div>
                             <div class="flex flex-col">
@@ -285,7 +285,7 @@
                 </div>
 
                 <div class="relative group flex-1 min-h-[400px]">
-                    <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+                    <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                     <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden flex flex-col h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                         <div class="p-6 border-b border-primary-100/30 dark:border-slate-800/50 flex items-center justify-between">
                             <h3 class="font-black text-lg text-primary-dark dark:text-white tracking-tight flex items-center gap-2" id="calendar-header">

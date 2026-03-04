@@ -161,28 +161,28 @@
         <!-- Clock Widgets -->
         <div class="lg:col-span-9 grid grid-cols-2 sm:grid-cols-4 gap-6">
             <div class="relative group">
-                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                     <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-100 tabular-nums tracking-tighter drop-shadow-sm" id="clock-hours">--</span>
                     <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Jam</span>
                 </div>
             </div>
             <div class="relative group">
-                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                     <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-100 tabular-nums tracking-tighter drop-shadow-sm" id="clock-minutes">--</span>
                     <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Menit</span>
                 </div>
             </div>
             <div class="relative group">
-                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                     <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-100 tabular-nums tracking-tighter drop-shadow-sm" id="clock-seconds">--</span>
                     <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Detik</span>
                 </div>
             </div>
             <div class="relative group">
-                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+                <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                     <span class="text-2xl sm:text-3xl font-black text-primary dark:text-primary-100 uppercase tracking-tight drop-shadow-sm" id="clock-ampm">--</span>
                     <span class="text-[10px] font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Waktu</span>
@@ -194,7 +194,7 @@
     <!-- Summary Cards (Moved to top) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 mt-2">
         <div class="relative group">
-            <div class="absolute inset-0 bg-green-100/60 dark:bg-green-900/40 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+            <div class="absolute inset-0 bg-green-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
             <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-8 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-green-900/5 flex items-center justify-between transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                 <div class="flex flex-col">
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Total Scan Masuk</span>
@@ -203,14 +203,14 @@
                         <span class="text-sm font-medium text-slate-400">Pegawai</span>
                     </div>
                 </div>
-                <div class="p-4 bg-green-50 dark:bg-green-900/50 rounded-2xl text-green-600">
+                <div class="p-4 bg-green-50 dark:bg-slate-900/50 rounded-2xl text-green-600">
                     <span class="material-symbols-outlined text-4xl">how_to_reg</span>
                 </div>
             </div>
         </div>
         
         <div class="relative group">
-            <div class="absolute inset-0 bg-blue-100/60 dark:bg-blue-900/40 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
+            <div class="absolute inset-0 bg-blue-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
             <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-8 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-blue-900/5 flex items-center justify-between transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                 <div class="flex flex-col">
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Total Scan Pulang</span>
@@ -219,7 +219,7 @@
                         <span class="text-sm font-medium text-slate-400">Pegawai</span>
                     </div>
                 </div>
-                <div class="p-4 bg-blue-50 dark:bg-blue-900/50 rounded-2xl text-blue-600">
+                <div class="p-4 bg-blue-50 dark:bg-slate-900/50 rounded-2xl text-blue-600">
                     <span class="material-symbols-outlined text-4xl">logout</span>
                 </div>
             </div>
@@ -227,7 +227,7 @@
     </div>
     <!-- Attendance Table Section -->
     <div class="relative group mt-4 h-full mb-8">
-        <div class="absolute inset-0 bg-slate-200/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2.5 translate-x-2.5 transition-transform md:group-hover:translate-y-3.5 md:group-hover:translate-x-3.5"></div>
+        <div class="absolute inset-0 bg-slate-200/60 dark:bg-slate-700 rounded-[2rem] translate-y-2.5 translate-x-2.5 transition-transform md:group-hover:translate-y-3.5 md:group-hover:translate-x-3.5"></div>
         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-slate-900/5 overflow-hidden flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
             <div class="px-8 py-6 border-b border-slate-100 dark:border-slate-700/50 flex flex-col gap-4">
                 <!-- Baris 1: Judul + Search -->

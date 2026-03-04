@@ -69,12 +69,12 @@
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex items-center justify-center p-4">
 
     <div class="relative group w-full max-w-md">
         <div class="absolute inset-0 bg-primary-100/60 rounded-[2rem] translate-y-3 translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
         
-        <div class="relative bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-primary-dark/10 overflow-hidden border border-white flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
+        <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-primary-dark/10 overflow-hidden border border-white dark:border-slate-700 flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
             
             <div class="bg-primary px-6 py-8 text-center relative overflow-hidden rounded-t-[2rem]">
                 <button onclick="toggleTheme()" class="absolute top-4 right-4 z-20 p-2 text-white/70 hover:text-white transition-colors rounded-xl bg-black/10 hover:bg-black/20" title="Toggle Theme">
@@ -109,21 +109,21 @@
             <form action="{{ route('login') }}" method="POST" class="space-y-5">
                 @csrf
                 <div>
-                    <label for="username" class="block text-sm font-semibold text-slate-700 mb-1">Username <span class="text-rose-500">*</span></label>
+                    <label for="username" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Username <span class="text-rose-500">*</span></label>
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px] pointer-events-none">person</span>
                         <input type="text" id="username" name="username" value="{{ old('username') }}" required autofocus
-                            class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white transition-all placeholder:text-slate-400" 
+                            class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white dark:focus:bg-slate-900 transition-all placeholder:text-slate-400" 
                             placeholder="Ketik username admin">
                     </div>
                 </div>
 
                 <div>
-                    <label for="password" class="block text-sm font-semibold text-slate-700 mb-1">Kata Sandi <span class="text-red-500">*</span></label>
+                    <label for="password" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Kata Sandi <span class="text-red-500">*</span></label>
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px] pointer-events-none">key</span>
                         <input type="password" id="password" name="password" required 
-                            class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white transition-all placeholder:text-slate-400" 
+                            class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white dark:focus:bg-slate-900 transition-all placeholder:text-slate-400" 
                             placeholder="••••••••">
                     </div>
                 </div>
@@ -134,15 +134,15 @@
                         <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                     </button>
                     
-                    <a href="{{ route('public.dashboard') }}" class="w-full mt-4 py-3 px-4 bg-white hover:bg-slate-50 text-slate-600 font-bold rounded-xl border border-slate-200 transition-all flex justify-center items-center gap-2 group">
-                        <span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-slate-600">arrow_back</span>
+                    <a href="{{ route('public.dashboard') }}" class="w-full mt-4 py-3 px-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold rounded-xl border border-slate-200 dark:border-slate-700 transition-all flex justify-center items-center gap-2 group">
+                        <span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white">arrow_back</span>
                         <span>Dashboard Publik</span>
                     </a>
                 </div>
             </form>
         </div>
         
-        <div class="py-5 bg-slate-50 border-t border-slate-100 text-center rounded-b-[2rem] px-4">
+        <div class="py-5 bg-slate-50 dark:bg-slate-900/80 border-t border-slate-100 dark:border-slate-800 text-center rounded-b-[2rem] px-4">
             <p class="text-xs text-slate-400">
                 © {{ date('Y') }}
                 <a href="https://solokkota.go.id/" target="_blank" rel="noopener" class="hover:text-primary transition-colors font-medium">Pemerintah Kota Solok</a>
