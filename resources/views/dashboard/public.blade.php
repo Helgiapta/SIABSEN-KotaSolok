@@ -60,18 +60,18 @@
     </script>
     <style>
         :root {
-            --color-primary: 15, 76, 117;
-            --color-primary-light: 50, 130, 184;
-            --color-primary-100: 187, 225, 250;
-            --color-slate-800: 30, 41, 59;
-            --color-slate-900: 15, 23, 42;
+            --color-primary: 15 76 117;
+            --color-primary-light: 50 130 184;
+            --color-primary-100: 187 225 250;
+            --color-slate-800: 30 41 59;
+            --color-slate-900: 15 23 42;
         }
         .dark {
-            --color-primary: 95, 133, 219;
-            --color-primary-light: 144, 184, 248;
-            --color-primary-100: 38, 40, 43;
-            --color-slate-800: 53, 57, 65;
-            --color-slate-900: 38, 40, 43;
+            --color-primary: 95 133 219;
+            --color-primary-light: 144 184 248;
+            --color-primary-100: 38 40 43;
+            --color-slate-800: 53 57 65;
+            --color-slate-900: 38 40 43;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -450,22 +450,18 @@
     function setScanFilter(btn) {
         activeScanFilter = btn.dataset.scan;
         document.querySelectorAll('.filter-scan').forEach(b => {
-            b.classList.remove('active-filter', 'bg-primary', 'text-white', 'border-primary');
-            b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+             b.className = 'filter-scan px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95';
         });
-        btn.classList.add('active-filter', 'bg-primary', 'text-white', 'border-primary');
-        btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+        btn.className = 'filter-scan active-filter px-4 py-1.5 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all shadow-sm active:scale-95';
         renderTable(attendanceData);
     }
 
     function setStatusFilter(btn) {
         activeStatusFilter = btn.dataset.status;
         document.querySelectorAll('.filter-status').forEach(b => {
-            b.classList.remove('active-filter', 'bg-primary', 'text-white', 'border-primary');
-            b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+            b.className = 'filter-status px-4 py-1.5 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:border-green-500 hover:text-green-600 transition-all shadow-sm active:scale-95';
         });
-        btn.classList.add('active-filter', 'bg-primary', 'text-white', 'border-primary');
-        btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+        btn.className = 'filter-status active-filter px-4 py-1.5 rounded-full text-xs font-bold border border-primary bg-primary text-white transition-all shadow-sm active:scale-95';
         renderTable(attendanceData);
     }
 

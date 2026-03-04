@@ -53,18 +53,18 @@
     </script>
     <style>
         :root {
-            --color-primary: 15, 76, 117;
-            --color-primary-light: 50, 130, 184;
-            --color-primary-100: 187, 225, 250;
-            --color-slate-800: 30, 41, 59;
-            --color-slate-900: 15, 23, 42;
+            --color-primary: 15 76 117;
+            --color-primary-light: 50 130 184;
+            --color-primary-100: 187 225 250;
+            --color-slate-800: 30 41 59;
+            --color-slate-900: 15 23 42;
         }
         .dark {
-            --color-primary: 95, 133, 219;
-            --color-primary-light: 144, 184, 248;
-            --color-primary-100: 38, 40, 43;
-            --color-slate-800: 53, 57, 65;
-            --color-slate-900: 38, 40, 43;
+            --color-primary: 95 133 219;
+            --color-primary-light: 144 184 248;
+            --color-primary-100: 38 40 43;
+            --color-slate-800: 53 57 65;
+            --color-slate-900: 38 40 43;
         }
         body { font-family: 'Inter', sans-serif; }
     </style>
