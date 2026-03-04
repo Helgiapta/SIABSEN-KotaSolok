@@ -11,19 +11,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0F4C75",
-                        "primary-light": "#3282B8",
+                        "primary": "rgb(var(--color-primary) / <alpha-value>)",
+                        "primary-light": "rgb(var(--color-primary-light) / <alpha-value>)",
                         "primary-dark": "#1B262C",
-                        "primary-100": "#BBE1FA",
+                        "primary-100": "rgb(var(--color-primary-100) / <alpha-value>)",
                         "background-light": "#f6f6f8",
                         "background-dark": "#121A1E",
                         "surface-light": "#ffffff",
                         "surface-dark": "#1B262C",
+                        "slate": {
+                            800: "rgb(var(--color-slate-800) / <alpha-value>)",
+                            900: "rgb(var(--color-slate-900) / <alpha-value>)"
+                        }
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"],
@@ -34,6 +53,20 @@
         }
     </script>
     <style>
+        :root {
+            --color-primary: 15, 76, 117;
+            --color-primary-light: 50, 130, 184;
+            --color-primary-100: 187, 225, 250;
+            --color-slate-800: 30, 41, 59;
+            --color-slate-900: 15, 23, 42;
+        }
+        .dark {
+            --color-primary: 95, 133, 219;
+            --color-primary-light: 144, 184, 248;
+            --color-primary-100: 38, 40, 43;
+            --color-slate-800: 53, 57, 65;
+            --color-slate-900: 38, 40, 43;
+        }
         @keyframes scan-animation {
             0% { top: 0%; opacity: 0; }
             50% { opacity: 1; }
@@ -85,9 +118,15 @@
                 <h1 class="text-xl font-black text-slate-800 tracking-tight">Scanner Kehadiran</h1>
             </div>
             
-            <div id="connection-status" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                <span class="size-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                Online
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="toggleTheme()" class="p-2 text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light transition-colors rounded-xl bg-slate-100 dark:bg-slate-800" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                </button>
+                <div id="connection-status" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                    <span class="size-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Online
+                </div>
             </div>
         </div>
     </header>

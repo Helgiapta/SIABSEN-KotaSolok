@@ -10,19 +10,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0F4C75",
-                        "primary-light": "#3282B8",
+                        "primary": "rgb(var(--color-primary) / <alpha-value>)",
+                        "primary-light": "rgb(var(--color-primary-light) / <alpha-value>)",
                         "primary-dark": "#1B262C",
-                        "primary-100": "#BBE1FA",
+                        "primary-100": "rgb(var(--color-primary-100) / <alpha-value>)",
                         "background-light": "#f6f6f8",
                         "background-dark": "#121A1E",
                         "surface-light": "#ffffff",
                         "surface-dark": "#1B262C",
+                        "slate": {
+                            800: "rgb(var(--color-slate-800) / <alpha-value>)",
+                            900: "rgb(var(--color-slate-900) / <alpha-value>)"
+                        }
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"],
@@ -33,6 +52,20 @@
         }
     </script>
     <style>
+        :root {
+            --color-primary: 15, 76, 117;
+            --color-primary-light: 50, 130, 184;
+            --color-primary-100: 187, 225, 250;
+            --color-slate-800: 30, 41, 59;
+            --color-slate-900: 15, 23, 42;
+        }
+        .dark {
+            --color-primary: 95, 133, 219;
+            --color-primary-light: 144, 184, 248;
+            --color-primary-100: 38, 40, 43;
+            --color-slate-800: 53, 57, 65;
+            --color-slate-900: 38, 40, 43;
+        }
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
@@ -44,6 +77,10 @@
         <div class="relative bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-primary-dark/10 overflow-hidden border border-white flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
             
             <div class="bg-primary px-6 py-8 text-center relative overflow-hidden rounded-t-[2rem]">
+                <button onclick="toggleTheme()" class="absolute top-4 right-4 z-20 p-2 text-white/70 hover:text-white transition-colors rounded-xl bg-black/10 hover:bg-black/20" title="Toggle Theme">
+                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                </button>
                 <div class="absolute -top-12 -right-12 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
                 <div class="absolute -bottom-8 -left-8 w-24 h-24 bg-primary-light/50 rounded-full blur-xl"></div>
                 
