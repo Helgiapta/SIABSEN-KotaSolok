@@ -433,13 +433,13 @@
                 } else if (data.status === 'warning') {
                     showResultModal('warning', 'Tunggu Sebentar', data.message);
                 } else {
-                    showResultModal('error', 'Gagal', data.message || 'QR Code tidak valid atau terjadi kesalahan.');
+                    showResultModal('error', 'Gagal', data.message || 'QR Code tidak valid atau terjadi kesalahan server.');
                 }
             } catch (err) {
                 console.error(err);
                 showResultModal('error', 'Koneksi Bermasalah', "Gagal terhubung ke server saat memproses scan.");
             } finally {
-                // Short debounce to prevent immediate double scans before backend responds
+                // Jeda singkat mencegah kode terdeteksi dua kali secara bersamaan 
                 setTimeout(() => { isProcessingScan = false; }, 2000);
             }
         }

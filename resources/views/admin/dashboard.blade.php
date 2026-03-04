@@ -147,64 +147,55 @@
             </div>
         </div>
 
-        <!-- ==============================
-             CARD PENGATURAN JAM KERJA
-             ============================== -->
+        <!-- Card Pengaturan Jam Kerja -->
         <div class="relative group">
             <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2rem] translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
             <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                <div class="px-6 py-5 flex flex-col gap-4">
-                    <!-- Baris 1: Judul -->
-                    <div class="flex items-center gap-3">
-                        <div class="p-2.5 bg-primary-100 dark:bg-slate-700 rounded-2xl shrink-0 text-primary dark:text-primary-100">
-                            <span class="material-symbols-outlined" style="font-size:22px">schedule</span>
+                <div class="px-5 py-4 flex flex-col sm:px-6 sm:py-5 gap-3 md:gap-4">
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <div class="p-2.5 bg-primary-100 dark:bg-slate-700 rounded-xl sm:rounded-2xl shrink-0 text-primary dark:text-primary-100">
+                            <span class="material-symbols-outlined text-[18px] sm:text-[22px]">schedule</span>
                         </div>
                         <div>
-                            <h4 class="font-black text-slate-800 dark:text-white text-sm tracking-tight">Pengaturan Jam Kerja</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">Batas waktu untuk melakukan scan presensi MASUK dan PULANG</p>
+                            <h4 class="font-black text-slate-800 dark:text-white text-xs sm:text-sm tracking-tight">Pengaturan Jam Kerja</h4>
+                            <p class="text-[10px] sm:text-xs text-slate-400 mt-0.5 leading-tight">Batas waktu scan presensi MASUK dan PULANG</p>
                         </div>
                     </div>
-                    <!-- Baris 2: Kontrol -->
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-                        <!-- Input Jam Masuk -->
-                        <div class="flex flex-col items-start gap-1 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700">
-                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Masuk</label>
-                            <div class="flex items-center gap-1">
-                                <input type="number" id="masuk-h" min="0" max="23" value="06"
-                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
-                                >
-                                <span class="font-black text-slate-300 text-xl">:</span>
-                                <input type="number" id="masuk-m" min="0" max="59" value="00"
-                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
-                                >
+                    <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4">
+                        <div class="grid grid-cols-2 lg:flex items-center gap-3 lg:gap-4">
+                            <div class="flex flex-col items-center sm:items-start gap-1 p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 w-full lg:w-auto">
+                                <label class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Masuk</label>
+                                <div class="flex items-center gap-1">
+                                    <input type="number" id="masuk-h" min="0" max="23" value="06"
+                                        class="w-12 px-1 sm:w-[50px] md:w-[60px] lg:w-[72px] text-center font-black text-primary text-base sm:text-lg md:text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl outline-none focus:border-primary transition-colors py-1 lg:py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
+                                    >
+                                    <span class="font-black text-slate-300 text-base sm:text-lg md:text-xl">:</span>
+                                    <input type="number" id="masuk-m" min="0" max="59" value="00"
+                                        class="w-12 px-1 sm:w-[50px] md:w-[60px] lg:w-[72px] text-center font-black text-primary text-base sm:text-lg md:text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl outline-none focus:border-primary transition-colors py-1 lg:py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
+                                    >
+                                </div>
                             </div>
-                        </div>
-
-                        <span class="font-black text-slate-300 text-xl hidden sm:block">-</span>
-                        
-                        <!-- Input Jam Pulang -->
-                        <div class="flex flex-col items-start gap-1 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700">
-                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Pulang</label>
-                            <div class="flex items-center gap-1">
-                                <input type="number" id="pulang-h" min="0" max="23" value="16"
-                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
-                                >
-                                <span class="font-black text-slate-300 text-xl">:</span>
-                                <input type="number" id="pulang-m" min="0" max="59" value="00"
-                                    class="w-[72px] text-center font-black text-primary text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-xl outline-none focus:border-primary transition-colors py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
-                                >
+                            
+                            <div class="flex flex-col items-center sm:items-start gap-1 p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 w-full lg:w-auto">
+                                <label class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wide">Jam Pulang</label>
+                                <div class="flex items-center gap-1">
+                                    <input type="number" id="pulang-h" min="0" max="23" value="16"
+                                        class="w-12 px-1 sm:w-[50px] md:w-[60px] lg:w-[72px] text-center font-black text-primary text-base sm:text-lg md:text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl outline-none focus:border-primary transition-colors py-1 lg:py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
+                                    >
+                                    <span class="font-black text-slate-300 text-base sm:text-lg md:text-xl">:</span>
+                                    <input type="number" id="pulang-m" min="0" max="59" value="00"
+                                        class="w-12 px-1 sm:w-[50px] md:w-[60px] lg:w-[72px] text-center font-black text-primary text-base sm:text-lg md:text-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg sm:rounded-xl outline-none focus:border-primary transition-colors py-1 lg:py-1.5 shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0"
+                                    >
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Button Container -->
-                        <div class="flex flex-col sm:flex-row items-center gap-4 flex-1 lg:flex-none ml-auto">
-                            <div class="flex items-center gap-3">
-                                <button onclick="saveWorkHoursSetting()" id="btn-save-workhours"
-                                    class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-light text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95">
-                                    <span class="material-symbols-outlined shrink-0" style="font-size:18px">save</span> Simpan
-                                </button>
-                                <span id="setting-saved-info" class="text-xs font-bold text-slate-400"></span>
-                            </div>
+                        <div class="flex flex-row md:flex-col lg:flex-row items-center justify-between md:justify-center lg:justify-start gap-3 md:ml-auto">
+                            <button onclick="saveWorkHoursSetting()" id="btn-save-workhours"
+                                class="flex-1 md:flex-none justify-center items-center gap-1.5 px-4 lg:px-6 py-2 pb-2.5 lg:py-3 bg-primary hover:bg-primary-light text-white text-[10px] lg:text-xs font-black uppercase tracking-widest rounded-xl shadow-xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95 flex">
+                                <span class="material-symbols-outlined shrink-0 text-[14px] lg:text-[18px]">save</span> Simpan
+                            </button>
+                            <span id="setting-saved-info" class="text-[9px] lg:text-xs font-bold text-slate-400 text-right md:text-center lg:text-left leading-tight w-24 md:w-auto"></span>
                         </div>
                     </div>
                 </div>
@@ -364,12 +355,12 @@
                     </div>
                     <div class="overflow-x-auto overflow-y-auto max-h-[520px] w-full">
                         <table class="w-full text-left border-collapse">
-                            <thead class="bg-primary-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+                            <thead class="bg-primary-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-[9px] sm:text-xs font-bold uppercase tracking-widest">
                             <tr>
-                                <th class="px-3 sm:px-6 py-4 w-12 sm:w-16 text-center">No</th>
-                                <th class="px-3 sm:px-6 py-4 min-w-[200px]">Anggota</th>
-                                <th class="px-3 sm:px-6 py-4 w-32 sm:w-64 text-center">QR Code</th>
-                                <th class="px-3 sm:px-6 py-4 w-20 sm:w-32 text-center">Aksi</th>
+                                <th class="px-1 sm:px-6 py-3 sm:py-4 w-6 sm:w-16 text-center">No</th>
+                                <th class="px-2 sm:px-6 py-3 sm:py-4 min-w-[110px] sm:min-w-[200px]">Anggota</th>
+                                <th class="px-2 sm:px-6 py-3 sm:py-4 w-14 sm:w-64 text-center">QR Code</th>
+                                <th class="px-1 sm:px-6 py-3 sm:py-4 w-10 sm:w-32 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="anggota-table-body" class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
@@ -1006,28 +997,28 @@
                                 : getSvgAvatar(item.nama);
 
                 tr.innerHTML = `
-                    <td class="px-6 py-4 text-center text-slate-500 font-medium border-r border-slate-100 dark:border-slate-800/60">${index + 1}</td>
-                    <td class="px-6 py-4 border-r border-slate-100 dark:border-slate-800/60">
-                        <div class="flex items-center gap-4">
-                            <!-- Foto Thumbnail (menggunakan attr data- untuk menghindari error kutip pada JS string parameter) -->
-                            <button data-id="${item.id}" data-nama="${safeName}" data-foto="${fotoSrc}" onclick="openModalFoto(this.dataset.id, this.dataset.nama, this.dataset.foto)" class="shrink-0 size-12 sm:size-14 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden border-2 border-slate-200 dark:border-slate-700 hover:border-primary transition-colors focus:ring-2 focus:ring-primary focus:outline-none" title="Ubah/Lihat Foto">
+                    <td class="px-1 sm:px-6 py-3 sm:py-4 text-center text-[10px] sm:text-sm text-slate-500 font-medium border-r border-slate-100 dark:border-slate-800/60">${index + 1}</td>
+                    <td class="px-2 sm:px-6 py-3 sm:py-4 border-r border-slate-100 dark:border-slate-800/60 overflow-hidden">
+                        <div class="flex items-center gap-2 sm:gap-4">
+                            <!-- Foto Thumbnail -->
+                            <button data-id="${item.id}" data-nama="${safeName}" data-foto="${fotoSrc}" onclick="openModalFoto(this.dataset.id, this.dataset.nama, this.dataset.foto)" class="shrink-0 size-8 sm:size-14 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden border-2 border-slate-200 dark:border-slate-700 hover:border-primary transition-colors focus:ring-2 focus:ring-primary focus:outline-none" title="Ubah/Lihat Foto">
                                 <img src="${fotoSrc}" alt="Foto ${safeName}" class="w-full h-full object-cover">
                             </button>
                             <!-- Nama dan ID -->
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-900 dark:text-white text-base">${safeName}</span>
-                                <span class="text-xs text-slate-400 font-mono mt-0.5" title="String QR Token Penuh: ${item.qr_code_token}">ID Token: <span class="text-slate-500 dark:text-slate-300">${item.qr_code_token.substring(0, 12)}...</span></span>
+                            <div class="flex flex-col min-w-0 flex-1">
+                                <span class="font-bold text-slate-900 dark:text-white text-xs sm:text-base truncate">${safeName}</span>
+                                <span class="text-[8px] sm:text-xs text-slate-400 font-mono mt-0.5 truncate" title="String QR Token Penuh: ${item.qr_code_token}"><span class="hidden sm:inline">ID Token: </span><span class="text-slate-500 dark:text-slate-300 hidden sm:inline">${item.qr_code_token.substring(0, 12)}...</span><span class="text-slate-500 dark:text-slate-300 sm:hidden">${item.qr_code_token.substring(0, 7)}...</span></span>
                             </div>
                         </div>
                     </td>
-                    <td class="px-3 sm:px-6 py-4 text-center">
-                        <button data-nama="${safeName}" data-qr="${item.qr_code_token}" data-url="${qrUrl}" onclick="openModalQR(this.dataset.nama, this.dataset.qr, this.dataset.url)" title="Perbesar QR Code" class="p-1 sm:p-2 bg-white border border-slate-200 shadow-sm rounded-xl hover:scale-105 hover:border-primary focus:ring-2 focus:ring-primary focus:outline-none transition-all cursor-pointer">
-                            <img src="${qrUrl}" alt="QR Code" class="size-14 sm:size-20 lg:size-24 rounded-lg mix-blend-multiply object-contain bg-white" />
+                    <td class="px-2 sm:px-6 py-3 sm:py-4 text-center">
+                        <button data-nama="${safeName}" data-qr="${item.qr_code_token}" data-url="${qrUrl}" onclick="openModalQR(this.dataset.nama, this.dataset.qr, this.dataset.url)" title="Perbesar QR Code" class="p-1 sm:p-2 bg-white border border-slate-200 shadow-sm rounded-lg sm:rounded-xl hover:scale-105 hover:border-primary focus:ring-2 focus:ring-primary focus:outline-none transition-all cursor-pointer inline-block">
+                            <img src="${qrUrl}" alt="QR Code" class="size-10 sm:size-20 lg:size-24 rounded sm:rounded-lg mix-blend-multiply object-contain bg-white mx-auto" />
                         </button>
                     </td>
-                    <td class="px-6 py-4 text-center">
-                        <button data-id="${item.id}" data-nama="${safeName}" onclick="deleteAnggota(this.dataset.id, this.dataset.nama)" title="Hapus Anggota" class="p-2 text-slate-400 hover:text-red-600 transition-colors hover:bg-red-50 dark:hover:bg-red-900/40 rounded-lg group-hover:opacity-100 sm:opacity-50">
-                            <span class="material-symbols-outlined text-[20px]">delete</span>
+                    <td class="px-1 sm:px-6 py-3 sm:py-4 text-center">
+                        <button data-id="${item.id}" data-nama="${safeName}" onclick="deleteAnggota(this.dataset.id, this.dataset.nama)" title="Hapus Anggota" class="p-1 sm:p-2 text-slate-400 hover:text-red-600 transition-colors hover:bg-red-50 dark:hover:bg-red-900/40 rounded-lg group-hover:opacity-100 sm:opacity-50">
+                            <span class="material-symbols-outlined text-[16px] sm:text-[20px]">delete</span>
                         </button>
                     </td>
                 `;

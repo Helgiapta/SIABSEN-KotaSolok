@@ -196,11 +196,7 @@ class DashboardController extends Controller
             'data' => $statusManual
         ]);
     }
-
-    // ===============================================
-    // FITUR KELOLA ANGGOTA (CRUD)
-    // ===============================================
-
+    // Fitur Kelola Anggota
     public function api_get_anggota()
     {
         $anggota = Anggota::orderBy('nama', 'asc')->get();
@@ -310,11 +306,7 @@ class DashboardController extends Controller
             'message' => 'Anggota berhasil dihapus.'
         ]);
     }
-
-    // ===============================================
-    // FITUR PENGATURAN SISTEM
-    // ===============================================
-
+    // Fitur Pengaturan Sistem
     private function settingsFilePath()
     {
         return storage_path('app/siabsen_settings.json');

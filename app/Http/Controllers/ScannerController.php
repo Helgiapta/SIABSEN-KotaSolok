@@ -34,7 +34,6 @@ class ScannerController extends Controller
         $today = Carbon::today()->toDateString();
         $now = Carbon::now();
 
-        // Load Settings
         $settingsPath = storage_path('app/siabsen_settings.json');
         $settings = file_exists($settingsPath) ? json_decode(file_get_contents($settingsPath), true) : [];
         $jamMasuk = $settings['jam_masuk'] ?? '06:00';
@@ -58,7 +57,6 @@ class ScannerController extends Controller
         }
 
         if ($count == 0) {
-            // Validasi Jam Masuk
             if ($now->lt($waktuMasuk)) {
                 return response()->json([
                     'status' => 'warning',
@@ -67,7 +65,6 @@ class ScannerController extends Controller
             }
             $tipe = 'IN';
         } else {
-            // Validasi Jam Pulang
             if ($now->lt($waktuPulang)) {
                 $diff = $now->diff($waktuPulang);
                 $diffStr = "";
