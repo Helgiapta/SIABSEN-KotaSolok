@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.theme === 'dark') {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
@@ -85,7 +85,10 @@
                     <div class="h-10 w-10 sm:h-12 sm:w-12 bg-blue-500/10 rounded-lg p-1 flex items-center justify-center shrink-0">
                         <img src="{{ asset('assets/images/siabsenlogo.png') }}" alt="Logo" class="w-full h-full object-contain filter drop-shadow-sm">
                     </div>
-                    <h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white truncate">Admin SIABSEN</h1>
+                    <div>
+                        <h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white truncate">Admin SIABSEN</h1>
+                        <span class="hidden sm:inline-block text-[10px] font-bold bg-primary-100 text-primary dark:bg-primary-100/20 dark:text-primary-light px-2 py-0.5 rounded-full uppercase tracking-wider">Mode Admin</span>
+                    </div>
                 </div>
             </div>
             
@@ -98,6 +101,10 @@
                     <a href="{{ route('public.dashboard') }}" class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl font-bold text-sm transition-colors border border-slate-200 dark:border-slate-700">
                         <span class="material-symbols-outlined text-xl">public</span>
                         <span>Dashboard Publik</span>
+                    </a>
+                    <a href="{{ route('admin.akun') }}" class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl font-bold text-sm transition-colors border border-slate-200 dark:border-slate-700">
+                        <span class="material-symbols-outlined text-xl">manage_accounts</span>
+                        <span>Akun</span>
                     </a>
                     <a href="{{ route('admin.scanner') }}" class="flex items-center gap-2 bg-primary hover:bg-primary-light text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-primary-light/30 transition-all hover:shadow-primary-light/50 hover:-translate-y-0.5">
                         <span class="material-symbols-outlined text-xl">qr_code_scanner</span>
@@ -190,7 +197,7 @@
             <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md rounded-[2rem] border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 overflow-hidden transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
                 <div class="px-5 py-4 flex flex-col sm:px-6 sm:py-5 gap-3 md:gap-4">
                     <div class="flex items-center gap-2 sm:gap-3">
-                        <div class="p-2.5 bg-primary-100 dark:bg-slate-700 rounded-xl sm:rounded-2xl shrink-0 text-primary dark:text-primary-100">
+                        <div class="p-2.5 bg-primary-100 dark:bg-slate-700 rounded-xl sm:rounded-2xl shrink-0 text-primary dark:text-primary-light">
                             <span class="material-symbols-outlined text-[18px] sm:text-[22px]">schedule</span>
                         </div>
                         <div>
@@ -249,7 +256,7 @@
                     <div class="relative group">
                         <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-1.5 translate-x-1.5 transition-transform md:hover:translate-y-2.5 md:hover:translate-x-2.5"></div>
                         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-5 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-0 transition-transform md:hover:-translate-y-1 md:hover:-translate-x-1">
-                            <div class="p-2.5 bg-primary-100 dark:bg-slate-900/50 text-primary dark:text-primary-100 rounded-2xl mb-2">
+                            <div class="p-2.5 bg-primary-100 dark:bg-slate-700 text-primary dark:text-primary-light rounded-2xl mb-2">
                                 <span class="material-symbols-outlined text-2xl">how_to_reg</span>
                             </div>
                             <div class="flex flex-col">
@@ -331,11 +338,17 @@
                                         <span class="p-2 bg-slate-100 dark:bg-slate-900/50 rounded-xl text-slate-600 material-symbols-outlined">history</span>
                                         Riwayat Kehadiran
                                     </h3>
-                                    <p class="text-sm text-slate-500 mt-1 sm:ml-12">Tanggal Terpilih: <span class="font-bold text-primary dark:text-primary-100" id="selected-date-text">-</span></p>
+                                    <p class="text-sm font-semibold text-slate-600 dark:text-slate-200 mt-1 sm:ml-12">Tanggal Terpilih: <span class="font-bold text-primary dark:text-primary-light" id="selected-date-text">-</span></p>
                                 </div>
-                                <div class="relative w-full sm:w-64">
-                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]">search</span>
-                                    <input id="search-input" class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all" placeholder="Cari nama anggota..." type="text"/>
+                                <div class="flex items-center gap-2 w-full sm:w-auto">
+                                    <div class="relative flex-1 sm:w-64">
+                                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]">search</span>
+                                        <input id="search-input" class="w-full pl-10 pr-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all" placeholder="Cari nama anggota..." type="text"/>
+                                    </div>
+                                    <button onclick="openExportModal()" class="flex items-center gap-1.5 px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md shadow-emerald-600/20 transition-all hover:-translate-y-0.5 shrink-0" title="Export ke Excel">
+                                        <span class="material-symbols-outlined text-[18px]">download</span>
+                                        <span class="hidden sm:inline">Export Excel</span>
+                                    </button>
                                 </div>
                             </div>
                             <!-- Filter chips Status Kehadiran -->
@@ -345,6 +358,7 @@
                                 <button data-astatus="Hadir Penuh" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-green-500 hover:text-green-600 transition-all">Hadir Penuh</button>
                                 <button data-astatus="Hadir Setengah" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-yellow-500 hover:text-yellow-600 transition-all">Hadir Setengah</button>
                                 <button data-astatus="Izin" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-blue-500 hover:text-blue-600 transition-all">Izin</button>
+                                <button data-astatus="Sakit" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-teal-500 hover:text-teal-600 transition-all">Sakit</button>
                                 <button data-astatus="Tidak Hadir" onclick="setAdminStatusFilter(this)" class="admin-filter-status px-3 py-1 rounded-full text-xs font-bold border border-slate-200 bg-white dark:bg-slate-700 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-red-500 hover:text-red-600 transition-all">Tidak Hadir</button>
                             </div>
                         </div>
@@ -504,7 +518,7 @@
 
                 <div class="mb-8">
                     <h3 class="text-2xl font-black text-slate-800 dark:text-white tracking-tight" id="zoom-qr-nama">Nama Anggota</h3>
-                    <p class="text-[10px] font-black text-primary dark:text-primary-100 uppercase tracking-widest mt-2 px-3 py-1 bg-primary-50 dark:bg-primary-900/30 rounded-full inline-block" id="zoom-qr-token">Token ID</p>
+                    <p class="text-[10px] font-black text-primary dark:text-primary-light uppercase tracking-widest mt-2 px-3 py-1 bg-primary-50 dark:bg-slate-700 rounded-full inline-block" id="zoom-qr-token">Token ID</p>
                 </div>
 
                 <div class="p-6 bg-white rounded-3xl shadow-inner border border-slate-100 mb-10 overflow-hidden group">
@@ -790,6 +804,8 @@
                     statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 gap-1.5"><span class="material-symbols-outlined text-[14px]">schedule</span> Hadir Setengah</span>`;
                 } else if (item.status_hari_ini === 'Izin') {
                     statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 gap-1.5"><span class="material-symbols-outlined text-[14px]">edit_document</span> ${item.status_hari_ini}</span>`;
+                } else if (item.status_hari_ini === 'Sakit') {
+                    statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300 gap-1.5"><span class="material-symbols-outlined text-[14px]">medical_services</span> Sakit</span>`;
                 } else {
                     statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 gap-1.5"><span class="material-symbols-outlined text-[14px]">cancel</span> Tidak Hadir</span>`;
                 }
@@ -841,12 +857,18 @@
                             <button onclick="updateManualStatus(${item.anggota_id}, '${tglString}', 'Izin')" class="w-full px-3 py-2 text-xs font-semibold hover:bg-slate-50 text-slate-700 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-[16px] text-purple-500">menu_book</span> Izin
                             </button>
+                            <button onclick="updateManualStatus(${item.anggota_id}, '${tglString}', 'Sakit')" class="w-full px-3 py-2 text-xs font-semibold hover:bg-slate-50 text-slate-700 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[16px] text-teal-500">medical_services</span> Sakit
+                            </button>
                             <button onclick="updateManualStatus(${item.anggota_id}, '${tglString}', 'Tidak Hadir')" class="w-full px-3 py-2 text-xs font-semibold hover:bg-slate-50 text-slate-700 flex items-center gap-2 border-t mt-1">
                                 <span class="material-symbols-outlined text-[16px] text-red-500">cancel</span> Tidak Hadir
                             </button>
-                            <button onclick="deleteAttendanceLogs(${item.anggota_id}, '${tglString}', '${safeName}')" class="w-full px-3 py-2 text-xs font-bold hover:bg-red-50 text-red-600 flex items-center gap-2 border-t mt-1">
-                                <span class="material-symbols-outlined text-[16px]">delete</span> Hapus Data
-                            </button>
+                            <button onclick="downloadRekapBulanAnggota(${item.anggota_id}, '${safeName}')" class="w-full px-3 py-2 text-xs font-bold hover:bg-emerald-50 dark:hover:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 flex items-center gap-2 border-t border-slate-100 dark:border-slate-700 mt-1">
+                                    <span class="material-symbols-outlined text-[16px]">file_download</span> Download Rekap Bulan Ini
+                                </button>
+                                <button onclick="deleteAttendanceLogs(${item.anggota_id}, '${tglString}', '${safeName}')" class="w-full px-3 py-2 text-xs font-bold hover:bg-red-50 text-red-600 flex items-center gap-2 border-t border-slate-100 dark:border-slate-700 mt-1">
+                                    <span class="material-symbols-outlined text-[16px]">delete</span> Hapus Data
+                                </button>
                         </div>
                     </td>
                 `;
@@ -1447,6 +1469,118 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => loadWorkHoursSetting());
+    </script>
+
+    <!-- Modal Export Excel -->
+    <div id="modal-export" class="fixed inset-0 z-[120] hidden flex-col items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[4px]" onclick="closeExportModal()"></div>
+        <div class="relative w-full max-w-sm transform transition-all duration-300 scale-95 opacity-0" id="modal-export-content">
+            <div class="absolute inset-0 bg-emerald-100/40 dark:bg-emerald-900/20 rounded-[2.5rem] translate-y-3 translate-x-3"></div>
+            <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 dark:border-slate-700 shadow-2xl">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-3 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 rounded-2xl">
+                        <span class="material-symbols-outlined text-3xl">file_download</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-black text-slate-800 dark:text-white">Export Excel</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Data kehadiran semua anggota</p>
+                    </div>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5 uppercase tracking-wider">Tanggal Mulai</label>
+                        <input type="date" id="export-date-start" oninput="updateDateHint('export-date-start','hint-start')" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400/40 focus:border-emerald-500 transition-all">
+                        <p id="hint-start" class="text-[11px] text-slate-400 mt-1 ml-1"></p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1.5 uppercase tracking-wider">Tanggal Selesai</label>
+                        <input type="date" id="export-date-end" oninput="updateDateHint('export-date-end','hint-end')" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400/40 focus:border-emerald-500 transition-all">
+                        <p id="hint-end" class="text-[11px] text-slate-400 mt-1 ml-1"></p>
+                    </div>
+                    <p class="text-[11px] text-slate-400">💡 Tanggal mulai = selesai untuk export per hari</p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="closeExportModal()" class="flex-1 py-3 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-200 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">Batal</button>
+                    <button onclick="doExportAll()" class="flex-[2] py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                        Download Excel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== EXPORT EXCEL =====
+        const BULAN_ID = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+        function formatTanggalID(isoStr) {
+            if (!isoStr) return '';
+            const [y, m, d] = isoStr.split('-');
+            return `${d} ${BULAN_ID[parseInt(m, 10) - 1]} ${y}`;
+        }
+
+        function updateDateHint(inputId, hintId) {
+            const val = document.getElementById(inputId).value;
+            document.getElementById(hintId).textContent = val ? '📅 ' + formatTanggalID(val) : '';
+        }
+
+        function openExportModal() {
+            const now      = new Date();
+            const today    = now.toISOString().split('T')[0];
+            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+            document.getElementById('export-date-start').value = firstDay;
+            document.getElementById('export-date-end').value   = today;
+            updateDateHint('export-date-start', 'hint-start');
+            updateDateHint('export-date-end',   'hint-end');
+
+            const modal   = document.getElementById('modal-export');
+            const content = document.getElementById('modal-export-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeExportModal() {
+            const modal   = document.getElementById('modal-export');
+            const content = document.getElementById('modal-export-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 200);
+        }
+
+        function doExportAll() {
+            const start = document.getElementById('export-date-start').value;
+            const end   = document.getElementById('export-date-end').value;
+            if (!start || !end) { alert('Harap isi tanggal mulai dan selesai.'); return; }
+            if (start > end)    { alert('Tanggal mulai tidak boleh lebih dari tanggal selesai.'); return; }
+            closeExportModal();
+            window.location.href = `{{ route('admin.export-excel') }}?date_start=${start}&date_end=${end}`;
+        }
+
+        function downloadRekapBulanAnggota(anggotaId, nama) {
+            if (currentMenuOpen) {
+                document.getElementById(currentMenuOpen).classList.add('hidden');
+                currentMenuOpen = null;
+            }
+            // Gunakan bulan dari selectedDate (tanggal yang sedang dipilih di kalender)
+            const year  = selectedDate.getFullYear();
+            const month = selectedDate.getMonth(); // 0-indexed
+
+            // Format manual — hindari toISOString() yang konversi ke UTC (bisa geser hari)
+            const pad  = n => String(n).padStart(2, '0');
+            const lastDay = new Date(year, month + 1, 0).getDate(); // hari terakhir bulan ini
+            const start = `${year}-${pad(month + 1)}-01`;
+            const end   = `${year}-${pad(month + 1)}-${pad(lastDay)}`;
+
+            window.location.href = `{{ route('admin.export-excel') }}?date_start=${start}&date_end=${end}&anggota_id=${anggotaId}`;
+        }
     </script>
 
     <!-- Footer -->

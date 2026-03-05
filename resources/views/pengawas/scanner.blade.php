@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Scanner Attendance - Siabsen</title>
+    <title>Scanner Kehadiran - Pengawas Siabsen</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/images/siabsenlogotrs.png') }}" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <meta name="theme-color" content="#0F4C75"/>
@@ -93,31 +93,26 @@
             width: 100% !important;
             height: 100% !important;
         }
-        #reader__scan_region {
-            border: none !important;
-        }
-        #reader__dashboard {
-            display: none !important;
-        }
-        #reader img[alt="Info icon"], 
-        #reader img[alt="Camera icon"] {
-            display: none !important;
-        }
-
+        #reader__scan_region { border: none !important; }
+        #reader__dashboard { display: none !important; }
+        #reader img[alt="Info icon"], #reader img[alt="Camera icon"] { display: none !important; }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-display min-h-screen flex flex-col overflow-x-hidden">
-    
+
     <!-- Top Nav -->
     <header class="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/50 dark:border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="{{ route('admin.dashboard') }}" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-500 transition-colors">
+                <a href="{{ route('pengawas.dashboard') }}" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-500 transition-colors">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </a>
-                <h1 class="text-xl font-black text-slate-800 tracking-tight">Scanner Kehadiran</h1>
+                <div>
+                    <h1 class="text-xl font-black text-slate-800 dark:text-white tracking-tight">Scanner Kehadiran</h1>
+                    <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Mode Pengawas</span>
+                </div>
             </div>
-            
+
             <div class="flex items-center gap-2 sm:gap-3">
                 <button onclick="toggleTheme()" class="p-2 text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light transition-colors rounded-xl bg-slate-100 dark:bg-slate-800" title="Toggle Theme">
                     <span class="material-symbols-outlined dark:hidden">dark_mode</span>
@@ -132,16 +127,15 @@
     </header>
 
     <main class="flex-1 max-w-7xl mx-auto w-full p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 py-6 sm:py-8 overflow-hidden">
-        
+
         <!-- Left: Scanner View (7 cols) -->
         <div class="lg:col-span-7 flex flex-col gap-6">
             <div class="relative group">
                 <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-[2.5rem] translate-y-2 translate-x-2 sm:translate-y-3 sm:translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
                 <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2.5rem] p-4 sm:p-6 lg:p-10 border border-white dark:border-slate-700 shadow-2xl shadow-primary-dark/10 flex flex-col items-center transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                    
-                    <!-- Decorative Elements (hidden on small screens to prevent overflow) -->
+
                     <div class="absolute -top-24 -right-24 size-64 bg-primary-light/10 blur-[80px] rounded-full hidden sm:block"></div>
-                    
+
                     <div class="w-full max-w-[500px] relative z-10 flex flex-col items-center">
                         <div class="w-full aspect-square relative rounded-[2rem] overflow-hidden bg-slate-50 dark:bg-slate-900 border-4 border-white dark:border-slate-800 shadow-inner group/scan">
                             <div id="scan-overlay" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
@@ -150,17 +144,14 @@
                                     <div class="absolute -top-1 -right-1 size-8 border-t-4 border-r-4 border-primary rounded-tr-2xl transition-all group-hover/scan:scale-110"></div>
                                     <div class="absolute -bottom-1 -left-1 size-8 border-b-4 border-l-4 border-primary rounded-bl-2xl transition-all group-hover/scan:scale-110"></div>
                                     <div class="absolute -bottom-1 -right-1 size-8 border-b-4 border-r-4 border-primary rounded-br-2xl transition-all group-hover/scan:scale-110"></div>
-                                    
                                     <div class="scan-line"></div>
                                 </div>
                             </div>
-                            
-                            <!-- The Reader -->
                             <div id="reader" class="rounded-[2rem] w-full h-full"></div>
                         </div>
 
                         <div class="mt-10 flex flex-col items-center gap-2 text-center w-full">
-                            <p class="text-xs font-bold text-primary uppercase tracking-widest bg-primary-100 px-3 py-1 rounded-full">Siap Memindai</p>
+                            <p class="text-xs font-bold text-primary uppercase tracking-widest bg-primary-100 dark:bg-primary-100/20 dark:text-primary-light px-3 py-1 rounded-full">Siap Memindai</p>
                             <h2 class="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white tracking-tight mt-1">Arahkan Kode QR ke Kamera</h2>
                         </div>
 
@@ -175,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- Last Result Card (Floating Alert Style) -->
+            <!-- Last Result Card -->
             <div id="scan-result" class="hidden transform transition-all duration-300 translate-y-4 opacity-0">
                 <div class="bg-primary rounded-2xl p-6 text-white shadow-2xl flex items-center justify-between border-4 border-white/20">
                     <div class="flex items-center gap-4">
@@ -183,13 +174,11 @@
                             <span class="material-symbols-outlined text-[32px]">check_circle</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg" id="result-name">Budi Sudarsono</h4>
-                            <p class="text-primary-100 text-sm" id="result-status">Scan IN Berhasil • 08:30 WIB</p>
+                            <h4 class="font-bold text-lg" id="result-name">Nama Anggota</h4>
+                            <p class="text-primary-100 text-sm" id="result-status">Scan Berhasil</p>
                         </div>
                     </div>
-                    <div class="size-16 rounded-full border-4 border-white/30 overflow-hidden bg-white/10" id="result-avatar">
-                        <!-- Initial or Image -->
-                    </div>
+                    <div class="size-16 rounded-full border-4 border-white/30 overflow-hidden bg-white/10" id="result-avatar"></div>
                 </div>
             </div>
         </div>
@@ -202,11 +191,11 @@
                     <div class="p-8 border-b border-slate-100 dark:border-slate-800">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-xl font-black text-slate-800 dark:text-white tracking-tight">Aktivitas Hari Ini</h3>
-                            <span class="px-3 py-1 bg-primary-100 dark:bg-slate-700 text-primary dark:text-primary-light text-[10px] font-bold rounded-full uppercase tracking-widest">Live Updates</span>
+                            <span class="px-3 py-1 bg-primary-100 dark:bg-slate-700 text-primary dark:text-primary-100 text-[10px] font-bold rounded-full uppercase tracking-widest">Live Updates</span>
                         </div>
-                        <p class="text-sm text-slate-500">Log kehadiran yang tercatat hari ini melalui scanner admin.</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Log kehadiran yang tercatat hari ini melalui scanner.</p>
                     </div>
-                    
+
                     <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-4" id="log-list">
                         <div class="p-12 text-center text-slate-400">
                             <span class="material-symbols-outlined text-[48px] opacity-20 mb-4">history</span>
@@ -245,17 +234,13 @@
     <!-- Custom Modal Result -->
     <div id="modal-result" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="relative w-full max-w-sm transform transition-all scale-95 opacity-0 duration-300" id="modal-content">
-            <!-- Modal Stack Layer -->
             <div class="absolute inset-0 bg-primary-100/80 rounded-[2rem] translate-y-2 translate-x-2" id="modal-stack-bg"></div>
             <div class="relative bg-white/95 dark:bg-surface-dark w-full rounded-[2rem] border border-white shadow-2xl overflow-hidden p-6 flex flex-col items-center text-center">
-                <!-- Icon Circle -->
                 <div id="modal-icon-bg" class="size-16 rounded-full flex items-center justify-center mb-4 shadow-inner">
                     <span id="modal-icon" class="material-symbols-outlined text-[36px]">check_circle</span>
                 </div>
-                
                 <h3 id="modal-title" class="text-xl font-black mb-1.5 tracking-tight">Pindaian Berhasil</h3>
                 <p id="modal-message" class="text-slate-500 text-sm font-medium dark:text-slate-400 leading-relaxed mb-6">Pesan akan muncul di sini.</p>
-                
                 <button onclick="closeResultModal()" class="w-full py-3 bg-slate-800 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-base shadow-xl hover:-translate-y-1 transition-all active:scale-95">
                     OKE, LANJUTKAN
                 </button>
@@ -266,14 +251,15 @@
     <audio id="beep-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
 
     <script>
-        const API_SCAN_URL = "{{ url('api/scan-qr') }}";
+        // Endpoint pengawas
+        const API_SCAN_URL = "{{ url('pengawas/api/scan-qr') }}";
         const API_LIVE_URL = "{{ url('api/live-attendance') }}";
-        const CSRF_TOKEN = "{{ csrf_token() }}";
-        
+        const CSRF_TOKEN   = "{{ csrf_token() }}";
+
         let html5QrCode;
-        let isScannerActive = false;
-        let currentFacingMode = 'environment';
-        let isProcessingScan = false;
+        let isScannerActive    = false;
+        let currentFacingMode  = 'environment';
+        let isProcessingScan   = false;
 
         function playBeep() {
             try {
@@ -285,19 +271,14 @@
 
         function createAvatar(nama) {
             const initials = nama ? nama.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2) : '??';
-            return `
-                <div class="w-full h-full flex items-center justify-center bg-white/20 text-white font-bold text-xl">
-                    ${initials}
-                </div>
-            `;
+            return `<div class="w-full h-full flex items-center justify-center bg-white/20 text-white font-bold text-xl">${initials}</div>`;
         }
 
         function createLogItem(data, isNew = false) {
             const isIN = data.tipe === 'IN' || data.tipe_absen === 'Datang';
             const logItem = document.createElement('div');
-            logItem.className = `flex flex-col gap-3 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm ${isNew ? 'animate-in fade-in slide-in-from-right-4 duration-500' : ''}`;
-            
-            // Status Badges
+            logItem.className = `flex flex-col gap-3 p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm`;
+
             let statusBadge = '';
             if (data.status_hari_ini === 'Hadir Penuh') {
                 statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-50 text-green-600 dark:bg-green-900/20 border border-green-100 dark:border-green-800">HADIR PENUH</span>`;
@@ -330,55 +311,43 @@
         }
 
         async function fetchScannerLogs() {
-            const list = document.getElementById('log-list');
+            const list     = document.getElementById('log-list');
             const syncIcon = document.getElementById('sync-icon');
-            if(syncIcon) syncIcon.classList.add('animate-spin');
+            if (syncIcon) syncIcon.classList.add('animate-spin');
 
             try {
                 const response = await fetch(API_LIVE_URL);
-                const result = await response.json();
-                
+                const result   = await response.json();
+
                 if (result.status === 'success') {
                     list.innerHTML = '';
                     if (result.data.length === 0) {
-                        list.innerHTML = `
-                            <div class="p-12 text-center text-slate-400">
-                                <span class="material-symbols-outlined text-[48px] opacity-20 mb-4">history</span>
-                                <p class="text-sm">Belum ada aktivitas scan</p>
-                            </div>
-                        `;
+                        list.innerHTML = `<div class="p-12 text-center text-slate-400"><span class="material-symbols-outlined text-[48px] opacity-20 mb-4">history</span><p class="text-sm">Belum ada aktivitas scan</p></div>`;
                     } else {
-                        result.data.forEach(item => {
-                            list.appendChild(createLogItem(item));
-                        });
+                        result.data.forEach(item => list.appendChild(createLogItem(item)));
                     }
                 }
             } catch (err) {
                 console.error("Fetch Logs Error:", err);
             } finally {
-                if(syncIcon) setTimeout(() => syncIcon.classList.remove('animate-spin'), 600);
+                if (syncIcon) setTimeout(() => syncIcon.classList.remove('animate-spin'), 600);
             }
         }
 
         function updateLogUI(data) {
             const list = document.getElementById('log-list');
-            
-            if (list.querySelector('.p-12')) {
-                list.innerHTML = '';
-            }
+            if (list.querySelector('.p-12')) list.innerHTML = '';
 
-            const logItem = createLogItem(data, true);
-            list.prepend(logItem);
+            list.prepend(createLogItem(data, true));
 
-            // Show Floating Result
-            const resultBox = document.getElementById('scan-result');
-            const resultName = document.getElementById('result-name');
+            const resultBox    = document.getElementById('scan-result');
+            const resultName   = document.getElementById('result-name');
             const resultStatus = document.getElementById('result-status');
             const resultAvatar = document.getElementById('result-avatar');
 
-            resultName.textContent = data.nama;
+            resultName.textContent   = data.nama;
             resultStatus.textContent = `Scan ${data.tipe === 'IN' ? 'MASUK' : 'PULANG'} Berhasil • ${data.waktu} WIB`;
-            resultAvatar.innerHTML = createAvatar(data.nama);
+            resultAvatar.innerHTML   = createAvatar(data.nama);
 
             resultBox.classList.remove('hidden');
             setTimeout(() => {
@@ -386,7 +355,6 @@
                 resultBox.classList.remove('translate-y-4');
             }, 10);
 
-            // Hide after 5 sec
             setTimeout(() => {
                 resultBox.classList.add('translate-y-4', 'opacity-0');
                 resultBox.classList.remove('translate-y-0');
@@ -395,35 +363,34 @@
         }
 
         function showResultModal(status, title, message) {
-            const modal = document.getElementById('modal-result');
-            const content = document.getElementById('modal-content');
-            const iconBg = document.getElementById('modal-icon-bg');
-            const icon = document.getElementById('modal-icon');
-            const titleEl = document.getElementById('modal-title');
+            const modal     = document.getElementById('modal-result');
+            const content   = document.getElementById('modal-content');
+            const iconBg    = document.getElementById('modal-icon-bg');
+            const icon      = document.getElementById('modal-icon');
+            const titleEl   = document.getElementById('modal-title');
             const messageEl = document.getElementById('modal-message');
 
             iconBg.className = "size-20 rounded-full flex items-center justify-center mb-6 ";
-            
+
             if (status === 'success') {
                 iconBg.classList.add('bg-green-100', 'dark:bg-green-900/30', 'text-green-600');
-                icon.textContent = 'check_circle';
+                icon.textContent  = 'check_circle';
                 titleEl.className = "text-2xl font-bold mb-2 text-green-600";
             } else if (status === 'warning') {
                 iconBg.classList.add('bg-orange-100', 'dark:bg-orange-900/30', 'text-orange-600');
-                icon.textContent = 'warning';
+                icon.textContent  = 'warning';
                 titleEl.className = "text-2xl font-bold mb-2 text-orange-600";
             } else {
                 iconBg.classList.add('bg-red-100', 'dark:bg-red-900/30', 'text-red-600');
-                icon.textContent = 'error';
+                icon.textContent  = 'error';
                 titleEl.className = "text-2xl font-bold mb-2 text-red-600";
             }
 
-            titleEl.textContent = title;
+            titleEl.textContent   = title;
             messageEl.textContent = message;
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            
             setTimeout(() => {
                 content.classList.remove('scale-95', 'opacity-0');
                 content.classList.add('scale-100', 'opacity-100');
@@ -431,7 +398,7 @@
         }
 
         function closeResultModal() {
-            const modal = document.getElementById('modal-result');
+            const modal   = document.getElementById('modal-result');
             const content = document.getElementById('modal-content');
 
             content.classList.remove('scale-100', 'opacity-100');
@@ -446,7 +413,7 @@
             }, 300);
         }
 
-        async function onScanSuccess(decodedText, decodedResult) {
+        async function onScanSuccess(decodedText) {
             if (isProcessingScan) return;
             isProcessingScan = true;
 
@@ -457,10 +424,7 @@
             try {
                 const response = await fetch(API_SCAN_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': CSRF_TOKEN
-                    },
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': CSRF_TOKEN },
                     body: JSON.stringify({ qr_code_token: decodedText })
                 });
 
@@ -478,47 +442,36 @@
                 console.error(err);
                 showResultModal('error', 'Koneksi Bermasalah', "Gagal terhubung ke server saat memproses scan.");
             } finally {
-                // Jeda singkat mencegah kode terdeteksi dua kali secara bersamaan 
                 setTimeout(() => { isProcessingScan = false; }, 2000);
             }
         }
 
         async function startScanner(facingMode = 'environment') {
             if (!window.isSecureContext) {
-                showResultModal('error', 'Masalah Keamanan', "Browser mendeteksi koneksi ini tidak aman. Kamera hanya bisa dibuka lewat HTTPS/Localhost.");
+                showResultModal('error', 'Masalah Keamanan', "Kamera hanya bisa dibuka lewat HTTPS/Localhost.");
                 return;
             }
-
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                showResultModal('error', 'Tidak Didukung', "Browser Anda tidak mendukung akses kamera atau fitur ini diblokir.");
+                showResultModal('error', 'Tidak Didukung', "Browser Anda tidak mendukung akses kamera.");
                 return;
             }
-
             try {
                 const devices = await Html5Qrcode.getCameras();
                 if (!devices || devices.length === 0) {
-                    showResultModal('error', 'Kamera Hilang', "Kamera tidak ditemukan pada perangkat ini. Pastikan Anda telah mengizinkan akses ke periferal kamera browser lalu muat ulang (refresh) halaman.");
+                    showResultModal('error', 'Kamera Hilang', "Kamera tidak ditemukan pada perangkat ini.");
                     return;
                 }
 
-                html5QrCode = new Html5Qrcode("reader");
+                html5QrCode    = new Html5Qrcode("reader");
                 currentFacingMode = facingMode;
 
-                const config = { 
-                    fps: 20, 
+                const config = {
+                    fps: 20,
                     aspectRatio: 1.0,
-                    videoConstraints: {
-                        facingMode: facingMode,
-                        aspectRatio: { ideal: 1.0 }
-                    }
+                    videoConstraints: { facingMode: facingMode, aspectRatio: { ideal: 1.0 } }
                 };
 
-                await html5QrCode.start(
-                    { facingMode: facingMode }, 
-                    config, 
-                    onScanSuccess
-                );
-
+                await html5QrCode.start({ facingMode: facingMode }, config, onScanSuccess);
                 isScannerActive = true;
 
                 const btn = document.getElementById('btn-toggle-camera');
@@ -528,14 +481,14 @@
                 }
             } catch (err) {
                 console.error("Camera Error:", err);
-                showResultModal('error', 'Kamera Error', "Gagal mengakses kamera. Muat ulang (refresh) halaman lalu pastikan ijin kamera browser telah diberikan dan Anda tidak membukanya bersamaan dengan aplikasi lain.");
+                showResultModal('error', 'Kamera Error', "Gagal mengakses kamera. Pastikan izin kamera telah diberikan.");
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchScannerLogs();
             startScanner('environment');
-            
+
             document.getElementById('btn-toggle-camera').addEventListener('click', async () => {
                 if (!html5QrCode) return;
                 const btn = document.getElementById('btn-toggle-camera');

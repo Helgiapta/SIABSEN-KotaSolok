@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
     <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.theme === 'dark') {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
@@ -145,9 +145,9 @@
             <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700/50 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
             <!-- Main Card -->
             <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col justify-center items-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                <span class="text-primary dark:text-primary-100 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 bg-primary-50 dark:bg-slate-700 px-3 py-1 rounded-full">Kalender</span>
+                <span class="text-primary dark:text-primary-light text-[10px] font-bold uppercase tracking-[0.2em] mb-4 bg-primary-50 dark:bg-slate-700 dark:text-slate-200 px-3 py-1 rounded-full">Kalender</span>
                 <div class="flex items-center gap-3">
-                    <div class="p-3 bg-primary-100 dark:bg-slate-700 rounded-2xl text-primary dark:text-primary-100">
+                    <div class="p-3 bg-primary-100 dark:bg-slate-700 rounded-2xl text-primary dark:text-primary-light">
                         <span class="material-symbols-outlined text-3xl">calendar_month</span>
                     </div>
                     <div>
@@ -163,29 +163,29 @@
             <div class="relative group">
                 <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                    <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-100 tabular-nums tracking-tighter drop-shadow-sm" id="clock-hours">--</span>
-                    <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Jam</span>
+                    <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-light tabular-nums tracking-tighter drop-shadow-sm" id="clock-hours">--</span>
+                    <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-300 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-700 px-3 py-1 rounded-full">Jam</span>
                 </div>
             </div>
             <div class="relative group">
                 <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                    <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-100 tabular-nums tracking-tighter drop-shadow-sm" id="clock-minutes">--</span>
-                    <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Menit</span>
+                    <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-light tabular-nums tracking-tighter drop-shadow-sm" id="clock-minutes">--</span>
+                    <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-300 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-700 px-3 py-1 rounded-full">Menit</span>
                 </div>
             </div>
             <div class="relative group">
                 <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                    <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-100 tabular-nums tracking-tighter drop-shadow-sm" id="clock-seconds">--</span>
-                    <span class="text-[10px] sm:text-xs font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Detik</span>
+                    <span class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary dark:text-primary-light tabular-nums tracking-tighter drop-shadow-sm" id="clock-seconds">--</span>
+                    <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-300 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-700 px-3 py-1 rounded-full">Detik</span>
                 </div>
             </div>
             <div class="relative group">
                 <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-700 rounded-3xl translate-y-2 translate-x-2 transition-transform md:group-hover:translate-y-3 md:group-hover:translate-x-3"></div>
                 <div class="relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 rounded-3xl border border-white dark:border-slate-700 shadow-xl shadow-primary-dark/5 flex flex-col items-center justify-center h-full transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
-                    <span class="text-2xl sm:text-3xl font-black text-primary dark:text-primary-100 uppercase tracking-tight drop-shadow-sm" id="clock-ampm">--</span>
-                    <span class="text-[10px] font-bold text-slate-400 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-900/50 px-3 py-1 rounded-full">Waktu</span>
+                    <span class="text-2xl sm:text-3xl font-black text-primary dark:text-primary-light uppercase tracking-tight drop-shadow-sm" id="clock-ampm">--</span>
+                    <span class="text-[10px] font-bold text-slate-500 dark:text-slate-300 mt-3 uppercase tracking-[0.3em] bg-slate-50 dark:bg-slate-700 px-3 py-1 rounded-full">Waktu</span>
                 </div>
             </div>
         </div>
@@ -413,7 +413,7 @@
                 <tr class="group md:hover:bg-slate-50 dark:md:hover:bg-slate-800/50 transition-colors">
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
-                            <div class="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 font-bold text-sm">${initials}</div>
+                            <div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-200 font-bold text-sm">${initials}</div>
                             <div>
                                 <p class="font-medium text-slate-900 dark:text-slate-100">${item.nama}</p>
                             </div>

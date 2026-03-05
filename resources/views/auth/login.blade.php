@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.theme === 'dark') {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
@@ -72,7 +72,7 @@
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex items-center justify-center p-4">
 
     <div class="relative group w-full max-w-md">
-        <div class="absolute inset-0 bg-primary-100/60 rounded-[2rem] translate-y-3 translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
+        <div class="absolute inset-0 bg-primary-100/60 dark:bg-slate-600/70 rounded-[2rem] translate-y-3 translate-x-3 transition-transform md:group-hover:translate-y-4 md:group-hover:translate-x-4"></div>
         
         <div class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-primary-dark/10 overflow-hidden border border-white dark:border-slate-700 flex flex-col transition-transform md:group-hover:-translate-y-1 md:group-hover:-translate-x-1">
             
@@ -88,15 +88,15 @@
                     <div class="h-20 w-20 bg-white/20 backdrop-blur-md rounded-2xl mx-auto p-2 mb-4 flex items-center justify-center border border-white/30 shadow-lg">
                         <img src="{{ asset('assets/images/siabsenlogotrs.png') }}" alt="Logo" class="w-full h-full object-contain filter drop-shadow-sm">
                     </div>
-                    <h1 class="text-2xl font-black text-white tracking-tight">Portal Admin</h1>
+                    <h1 class="text-2xl font-black text-white tracking-tight">Portal Login</h1>
                     <p class="text-primary-100 text-sm mt-1 font-medium">Sistem Informasi Absensi Kota Solok</p>
                 </div>
             </div>
 
             <div class="p-8 pb-4">
-                <div class="mb-8 flex items-center justify-center gap-2 text-primary font-bold bg-primary-100 py-2 px-4 rounded-xl mx-auto w-max">
+                <div class="mb-8 flex items-center justify-center gap-2 text-primary dark:text-primary-light font-bold bg-primary-100 dark:bg-slate-700 py-2 px-4 rounded-xl mx-auto w-max border dark:border-slate-600">
                     <span class="material-symbols-outlined text-[20px]">shield_person</span>
-                    <span>Login Admin</span>
+                    <span>Login Akun</span>
                 </div>
 
             @if ($errors->any())
@@ -114,7 +114,7 @@
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px] pointer-events-none">person</span>
                         <input type="text" id="username" name="username" value="{{ old('username') }}" required autofocus
                             class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white dark:focus:bg-slate-900 transition-all placeholder:text-slate-400" 
-                            placeholder="Ketik username admin">
+                            placeholder="Ketik username akun">
                     </div>
                 </div>
 

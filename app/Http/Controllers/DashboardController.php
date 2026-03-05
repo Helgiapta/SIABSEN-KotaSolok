@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use App\Models\LogAbsensi;
 use App\Models\Anggota;
 use App\Models\StatusManual;
+use App\Exports\AbsensiExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -123,7 +126,7 @@ class DashboardController extends Controller
                 $statistik['hadir_penuh']++;
             } elseif ($status == 'Hadir Setengah') {
                 $statistik['hadir_setengah']++;
-            } elseif ($status == 'Izin') {
+            } elseif ($status == 'Izin' || $status == 'Sakit') {
                 $statistik['izin']++;
             } else {
                 $status = 'Tidak Hadir';
@@ -177,7 +180,7 @@ class DashboardController extends Controller
         $request->validate([
             'anggota_id' => 'required|exists:anggota,id',
             'tanggal' => 'required|date',
-            'status' => 'required|in:Hadir Penuh,Hadir Setengah,Tidak Hadir,Izin'
+            'status'     => 'required|in:Hadir Penuh,Hadir Setengah,Tidak Hadir,Izin,Sakit'
         ]);
 
         $statusManual = StatusManual::updateOrCreate(
@@ -218,7 +221,7 @@ class DashboardController extends Controller
         $fotoPath = null;
         if($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time() . '_' . Str::uuid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/images/anggota'), $filename);
             $fotoPath = 'assets/images/anggota/' . $filename;
         }
@@ -254,7 +257,7 @@ class DashboardController extends Controller
             }
 
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time() . '_' . Str::uuid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/images/anggota'), $filename);
             $anggota->foto = 'assets/images/anggota/' . $filename;
             $anggota->save();
@@ -348,6 +351,7 @@ class DashboardController extends Controller
         $settings['jam_pulang'] = $request->jam_pulang;
 
         file_put_contents($this->settingsFilePath(), json_encode($settings, JSON_PRETTY_PRINT));
+        Cache::forget('siabsen_settings');
 
         return response()->json([
             'status' => 'success',
@@ -355,4 +359,28 @@ class DashboardController extends Controller
             'data' => $settings
         ]);
     }
+
+    public function exportExcel(Request $request)
+    {
+        $request->validate([
+            'date_start' => 'required|date',
+            'date_end'   => 'required|date|after_or_equal:date_start',
+            'anggota_id' => 'nullable|exists:anggota,id',
+        ]);
+
+        $dateStart  = $request->date_start;
+        $dateEnd    = $request->date_end;
+        $anggotaId  = $request->anggota_id ? (int) $request->anggota_id : null;
+
+        $namaAnggota = null;
+        if ($anggotaId) {
+            $namaAnggota = Anggota::find($anggotaId)?->nama;
+        }
+
+        $filename = AbsensiExport::generateFilename($dateStart, $dateEnd, $namaAnggota);
+        $export   = new AbsensiExport($dateStart, $dateEnd, $anggotaId);
+
+        return Excel::download($export, $filename);
+    }
 }
+

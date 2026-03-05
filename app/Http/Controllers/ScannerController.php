@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Anggota;
 use App\Models\LogAbsensi;
 use Carbon\Carbon;
@@ -35,7 +36,9 @@ class ScannerController extends Controller
         $now = Carbon::now();
 
         $settingsPath = storage_path('app/siabsen_settings.json');
-        $settings = file_exists($settingsPath) ? json_decode(file_get_contents($settingsPath), true) : [];
+        $settings = Cache::remember('siabsen_settings', 3600, function () use ($settingsPath) {
+            return file_exists($settingsPath) ? json_decode(file_get_contents($settingsPath), true) : [];
+        });
         $jamMasuk = $settings['jam_masuk'] ?? '06:00';
         $jamPulang = $settings['jam_pulang'] ?? '16:00';
 
@@ -71,7 +74,7 @@ class ScannerController extends Controller
                 if ($diff->h > 0) $diffStr .= "{$diff->h} Jam ";
                 if ($diff->i > 0) $diffStr .= "{$diff->i} Menit ";
                 if ($diff->s > 0) $diffStr .= "{$diff->s} Detik";
-                
+
                 return response()->json([
                     'status' => 'warning',
                     'message' => "Tunggu Sebentar! {$anggota->nama} sudah scan MASUK. Untuk melakukan scan PULANG Anda harus menunggu hingga pukul {$jamPulang} WIB (Sisa Waktu: ".trim($diffStr)." lagi)."
@@ -94,7 +97,7 @@ class ScannerController extends Controller
                                 ->get();
         $hasIn = $allLogsToday->where('tipe_absen', 'IN')->isNotEmpty();
         $hasOut = $allLogsToday->where('tipe_absen', 'OUT')->isNotEmpty();
-        
+
         $statusHariIni = 'Tidak Hadir';
         if ($hasIn && $hasOut) {
             $statusHariIni = 'Hadir Penuh';

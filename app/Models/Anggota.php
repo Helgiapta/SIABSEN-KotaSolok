@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Anggota extends Model
 {
     protected $table = 'anggota';
-    protected $guarded = [];
+    protected $fillable = ['nama', 'foto', 'status_aktif', 'qr_code_token'];
 
     public function status_manuals()
     {
