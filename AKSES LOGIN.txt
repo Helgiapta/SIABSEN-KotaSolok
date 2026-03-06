@@ -1,5 +1,0 @@
-u : adm
-p : as12345d
-
-Tambah User Baru
-CMD / Terminal : php artisan tinker --execute="\App\Models\User::create(['name' => 'Admin', 'username' => 'adm', 'password' => bcrypt('as12345d')]); echo 'User berhasil dibuat!';"
